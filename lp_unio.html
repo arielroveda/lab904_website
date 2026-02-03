@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UnIO - Plataforma de Atendimento Omnichannel | Lab904</title>
+    <meta name="description" content="UnIO: Centralize WhatsApp, Instagram e Facebook em uma plataforma inteligente. Pare de pular de aba em aba e transforme seu atendimento em uma máquina de vendas.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* === UnIO Brand Colors === */
+        :root {
+            --unio-primary: #6366F1;
+            --unio-secondary: #8B5CF6;
+            --unio-accent: #A78BFA;
+            --unio-success: #10B981;
+            --unio-danger: #EF4444;
+        }
+
+        /* === Btn Overrides === */
+        .btn {
+            padding: 1.2rem 2.5rem;
+            border-radius: 12px;
+            font-size: 1.05rem;
+        }
+
+        .btn-secondary {
+            border-width: 2px;
+        }
+
+        .btn-unio {
+            background: linear-gradient(135deg, var(--unio-primary), var(--unio-secondary));
+            color: white;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-unio:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+        }
+
+        /* === Hero === */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.5rem, 5vw, 3.8rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-highlight {
+            background: linear-gradient(135deg, var(--unio-primary), var(--unio-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            color: var(--color-text-dim);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .hero-visual {
+            position: relative;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        /* === Unified Inbox Mockup === */
+        .inbox-mockup {
+            background: var(--color-surface);
+            border: 3px solid var(--unio-primary);
+            border-radius: 24px;
+            padding: 1.5rem;
+            box-shadow: 0 30px 80px rgba(99, 102, 241, 0.25);
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .inbox-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            margin-bottom: 1rem;
+        }
+
+        .inbox-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.4rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--unio-primary), var(--unio-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .inbox-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-left: auto;
+        }
+
+        .inbox-tab {
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--color-text-dim);
+        }
+
+        .inbox-tab.active {
+            background: var(--unio-primary);
+            color: white;
+        }
+
+        .inbox-messages {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .inbox-message {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--color-surface-elevated);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: slideIn 0.4s ease both;
+        }
+
+        .inbox-message:hover {
+            transform: translateX(5px);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .message-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .message-icon.whatsapp {
+            background: #25D366;
+        }
+
+        .message-icon.instagram {
+            background: linear-gradient(135deg, #833AB4, #FD1D1D, #F77737);
+        }
+
+        .message-icon.facebook {
+            background: #1877F2;
+        }
+
+        .message-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .message-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .message-preview {
+            font-size: 0.85rem;
+            color: var(--color-text-dim);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            color: var(--color-text-dim);
+        }
+
+        .message-badge {
+            background: var(--unio-primary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        /* === Problem Section === */
+        .problem-section {
+            padding: 8rem 2rem;
+            background: rgba(239, 68, 68, 0.03);
+        }
+
+        .problem-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--color-text), var(--unio-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .problem-text {
+            font-size: 1.25rem;
+            line-height: 1.9;
+            color: var(--color-text-dim);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .problem-text strong {
+            color: var(--unio-danger);
+        }
+
+        /* === Solution Section === */
+        .solution-section {
+            padding: 8rem 2rem;
+        }
+
+        .solution-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .solution-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .solution-tagline {
+            font-size: 1.3rem;
+            color: var(--unio-primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .solution-description {
+            font-size: 1.2rem;
+            color: var(--color-text-dim);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .inbox-feature {
+            background: var(--color-surface);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .inbox-feature-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .inbox-feature-text h3 span {
+            font-size: 2.5rem;
+        }
+
+        .inbox-feature-text p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--color-text-dim);
+        }
+
+        .inbox-visual {
+            display: flex;
+            justify-content: center;
+        }
+
+        .unified-channels {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .channel-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            background: var(--color-surface-elevated);
+            border-radius: 16px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .channel-badge:hover {
+            transform: translateY(-5px);
+            border-color: var(--unio-primary);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+        }
+
+        .channel-badge .icon {
+            font-size: 1.8rem;
+        }
+
+        .channel-badge span {
+            font-weight: 600;
+        }
+
+        /* === Features === */
+        .features {
+            padding: 8rem 2rem;
+            background: rgba(99, 102, 241, 0.03);
+        }
+
+        .features-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: var(--color-surface);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--unio-primary), var(--unio-secondary));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--unio-primary);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.2);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--unio-primary);
+        }
+
+        .feature-card > p {
+            color: var(--color-text-dim);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .feature-list li {
+            padding: 0.6rem 0;
+            padding-left: 1.8rem;
+            position: relative;
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--unio-success);
+            font-weight: 700;
+        }
+
+        /* === Comparison Table === */
+        .comparison {
+            padding: 8rem 2rem;
+        }
+
+        .comparison-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .comparison-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .comparison-intro p {
+            font-size: 1.15rem;
+            color: var(--color-text-dim);
+            max-width: 700px;
+            margin: 1.5rem auto 0;
+            line-height: 1.8;
+        }
+
+        .comparison-table-wrapper {
+            overflow-x: auto;
+            margin-top: 3rem;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: var(--color-surface);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, var(--color-surface-elevated), var(--color-surface));
+        }
+
+        .comparison-table th {
+            padding: 1.5rem 2rem;
+            text-align: left;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .comparison-table th:first-child {
+            width: 25%;
+        }
+
+        .comparison-table th:nth-child(2) {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--unio-danger);
+        }
+
+        .comparison-table th:nth-child(3) {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--unio-primary);
+        }
+
+        .comparison-table td {
+            padding: 1.2rem 2rem;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+            vertical-align: top;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table td:first-child {
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .comparison-table td:nth-child(2) {
+            background: rgba(239, 68, 68, 0.03);
+            color: var(--color-text-dim);
+        }
+
+        .comparison-table td:nth-child(3) {
+            background: rgba(99, 102, 241, 0.03);
+            color: var(--color-text);
+        }
+
+        .comparison-table .icon-bad {
+            color: var(--unio-danger);
+            margin-right: 0.5rem;
+        }
+
+        .comparison-table .icon-good {
+            color: var(--unio-success);
+            margin-right: 0.5rem;
+        }
+
+        .comparison-cta {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        /* === Differentials === */
+        .differentials {
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.08));
+        }
+
+        .differentials-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .differentials-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .differentials-quote {
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+            font-weight: 600;
+            color: var(--unio-primary);
+            font-style: italic;
+            margin-top: 1rem;
+        }
+
+        .differentials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .differential-card {
+            background: var(--color-surface);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.4s ease;
+        }
+
+        .differential-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.15);
+            border-color: var(--unio-primary);
+        }
+
+        .differential-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--unio-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .differential-card h4 span {
+            font-size: 1.5rem;
+        }
+
+        .differential-card p {
+            color: var(--color-text-dim);
+            line-height: 1.7;
+        }
+
+        /* === FAQ === */
+        .faq {
+            padding: 8rem 2rem;
+        }
+
+        .faq-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .faq-item {
+            background: var(--color-surface);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--unio-primary);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.1);
+        }
+
+        .faq-question {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .faq-question::before {
+            content: '?';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--unio-primary), var(--unio-secondary));
+            color: white;
+            border-radius: 50%;
+            font-size: 1rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .faq-answer {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--color-text-dim);
+            padding-left: 2.8rem;
+        }
+
+        /* === Final CTA === */
+        .final-cta {
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, var(--unio-primary), var(--unio-secondary));
+            color: white;
+        }
+
+        .final-cta-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .final-cta p {
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+
+        .btn-white {
+            background: white;
+            color: var(--unio-primary);
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* === Footer Override === */
+        .footer-content {
+            display: block;
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        .footer-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--unio-primary), var(--unio-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-text {
+            color: var(--color-text-dim);
+            margin-bottom: 2rem;
+        }
+
+        /* === Responsivo === */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .inbox-mockup {
+                max-width: 400px;
+            }
+
+            .inbox-feature {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .inbox-mockup {
+                padding: 1rem;
+            }
+
+            .inbox-message {
+                padding: 0.8rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .comparison-table th:first-child,
+            .comparison-table td:first-child {
+                min-width: 120px;
+            }
+
+            .final-cta-content {
+                padding: 2rem 1rem;
+            }
+
+            .differentials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo">LAB904</a>
+            <ul class="nav-links">
+                <li class="has-dropdown">
+                    <a href="index.html#produtos" class="active">Produtos</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-grid">
+                            <div class="mega-menu-column">
+                                <h3>Saude</h3>
+                                <ul class="mega-menu-items">
+                                    <li>
+                                        <a href="lp_tina.html">
+                                            <div class="submenu-title">Tina</div>
+                                            <div class="submenu-desc">IA para Odontologia e Estetica</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="mega-menu-column">
+                                <h3>Atendimento</h3>
+                                <ul class="mega-menu-items">
+                                    <li>
+                                        <a href="lp_unio.html">
+                                            <div class="submenu-title">UnIO</div>
+                                            <div class="submenu-desc">Plataforma de Gestao Omnichannel de Mensagens</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="has-dropdown">
+                    <a href="index.html#servicos">Servicos</a>
+                    <div class="mega-menu">
+                        <div class="mega-menu-grid">
+                            <div class="mega-menu-column">
+                                <h3>Tecnologia</h3>
+                                <ul class="mega-menu-items">
+                                    <li><a href="index.html#servicos">Inteligencia Artificial</a></li>
+                                    <li><a href="index.html#servicos">Automacao</a></li>
+                                    <li><a href="index.html#servicos">Business Intelligence</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-menu-column">
+                                <h3>Processos</h3>
+                                <ul class="mega-menu-items">
+                                    <li><a href="index.html#servicos">Mapeamento de Processos</a></li>
+                                    <li><a href="index.html#servicos">Consultoria</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-menu-column">
+                                <h3>Pessoas</h3>
+                                <ul class="mega-menu-items">
+                                    <li><a href="index.html#servicos">Palestras e Cursos</a></li>
+                                    <li><a href="index.html#servicos">Mentorias</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="about.html">Sobre</a></li>
+                <li><a href="index.html#contato">Contato</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="Alternar tema" id="themeToggle">
+                    <span id="themeIcon">&#127769;</span>
+                </button>
+                <button class="menu-toggle" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>
+                        <span class="hero-highlight">UnIO</span>: Todas as suas conversas em um unico lugar.
+                    </h1>
+                    <p>
+                        Pare de pular de aba em aba. Centralize WhatsApp, Instagram e Facebook em uma plataforma inteligente e de a sua equipe o superpoder da produtividade.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#contato" class="btn btn-unio">
+                            Comecar agora
+                        </a>
+                        <a href="#demo" class="btn btn-secondary">
+                            Ver demonstracao
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="inbox-mockup">
+                        <div class="inbox-header">
+                            <div class="inbox-logo">UnIO</div>
+                            <div class="inbox-tabs">
+                                <span class="inbox-tab active">Todos</span>
+                                <span class="inbox-tab">Abertos</span>
+                            </div>
+                        </div>
+                        <div class="inbox-messages">
+                            <div class="inbox-message" style="animation-delay: 0.2s">
+                                <div class="message-icon whatsapp">&#128172;</div>
+                                <div class="message-content">
+                                    <div class="message-name">Maria Silva</div>
+                                    <div class="message-preview">Ola, gostaria de saber o preco...</div>
+                                </div>
+                                <div class="message-time">2min</div>
+                                <span class="message-badge">Novo</span>
+                            </div>
+                            <div class="inbox-message" style="animation-delay: 0.4s">
+                                <div class="message-icon instagram">&#128247;</div>
+                                <div class="message-content">
+                                    <div class="message-name">@joao.santos</div>
+                                    <div class="message-preview">Vi o produto no Stories e...</div>
+                                </div>
+                                <div class="message-time">5min</div>
+                            </div>
+                            <div class="inbox-message" style="animation-delay: 0.6s">
+                                <div class="message-icon facebook">&#128077;</div>
+                                <div class="message-content">
+                                    <div class="message-name">Pedro Oliveira</div>
+                                    <div class="message-preview">Voces fazem entrega para...</div>
+                                </div>
+                                <div class="message-time">12min</div>
+                            </div>
+                            <div class="inbox-message" style="animation-delay: 0.8s">
+                                <div class="message-icon whatsapp">&#128172;</div>
+                                <div class="message-content">
+                                    <div class="message-name">Ana Costa</div>
+                                    <div class="message-preview">Obrigada pelo atendimento!</div>
+                                </div>
+                                <div class="message-time">18min</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem Section -->
+        <section class="problem-section">
+            <div class="problem-content">
+                <h2 class="section-title">Sua empresa esta perdendo vendas no caos das notificacoes?</h2>
+                <p class="problem-text">
+                    Responder um cliente no Direct, outro no WhatsApp e um terceiro no Messenger exige tempo e foco que sua equipe nao tem. <strong>Mensagens esquecidas e respostas lentas sao o caminho mais curto para perder um cliente para a concorrencia.</strong>
+                </p>
+            </div>
+        </section>
+
+        <!-- Solution Section -->
+        <section class="solution-section">
+            <div class="solution-content">
+                <div class="solution-header">
+                    <h2 class="section-title">UnIO: A uniao perfeita entre simplicidade e controle</h2>
+                    <p class="solution-tagline">Apresentando a solucao</p>
+                    <p class="solution-description">
+                        A UnIO e uma plataforma de atendimento Omnichannel desenhada para empresas que precisam de organizacao profissional sem a complexidade de sistemas engessados.
+                    </p>
+                </div>
+
+                <div class="inbox-feature">
+                    <div class="inbox-feature-text">
+                        <h3><span>&#128229;</span> Inbox Unificada</h3>
+                        <p>
+                            Nao importa por onde o cliente venha. Todas as mensagens caem em uma fila unica e organizada. Sua equipe visualiza e responde tudo de dentro da UnIO.
+                        </p>
+                    </div>
+                    <div class="inbox-visual">
+                        <div class="unified-channels">
+                            <div class="channel-badge">
+                                <span class="icon">&#128172;</span>
+                                <span>WhatsApp</span>
+                            </div>
+                            <div class="channel-badge">
+                                <span class="icon">&#128247;</span>
+                                <span>Instagram</span>
+                            </div>
+                            <div class="channel-badge">
+                                <span class="icon">&#128077;</span>
+                                <span>Facebook</span>
+                            </div>
+                            <div class="channel-badge">
+                                <span class="icon">&#128187;</span>
+                                <span>Live Chat</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="features-content">
+                <div class="section-header">
+                    <h2 class="section-title">Funcionalidades de Alto Nivel</h2>
+                    <p class="solution-description">Baseadas no Core Chatwoot, com a experiencia Lab904</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">&#128101;</div>
+                        <h3>Colaboracao em Tempo Real</h3>
+                        <ul class="feature-list">
+                            <li><strong>Notas Privadas:</strong> Converse internamente com sua equipe dentro do chat do cliente sem que ele veja. Ideal para tirar duvidas rapidas antes de responder.</li>
+                            <li><strong>Atribuicao Automatica:</strong> Direcione as conversas para o atendente disponivel ou para o setor responsavel (Vendas, Suporte, Financeiro).</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">&#9889;</div>
+                        <h3>Agilidade que Converte</h3>
+                        <ul class="feature-list">
+                            <li><strong>Respostas Rapidas:</strong> Crie atalhos para as perguntas mais frequentes e responda em segundos com um padrao de excelencia.</li>
+                            <li><strong>Etiquetas e Filtros:</strong> Organize seus contatos por prioridade, status da venda ou tipo de servico para nunca mais perder um lead de vista.</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">&#128241;</div>
+                        <h3>Sua empresa no seu bolso</h3>
+                        <p>App Mobile Profissional</p>
+                        <ul class="feature-list">
+                            <li>Atenda seus clientes de onde estiver com o aplicativo para iOS e Android.</li>
+                            <li>Notificacoes em tempo real e interface intuitiva.</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">&#128202;</div>
+                        <h3>Gestao Baseada em Dados</h3>
+                        <p>Relatorios de Desempenho</p>
+                        <ul class="feature-list">
+                            <li>Saiba quanto tempo sua equipe leva para responder.</li>
+                            <li>Identifique os horarios de maior pico para otimizar sua operacao.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Table Section -->
+        <section class="comparison">
+            <div class="comparison-content">
+                <div class="comparison-intro">
+                    <h2 class="section-title">Pare de apagar incendios e comece a escalar seu atendimento</h2>
+                    <p>
+                        Muitas empresas tentam gerenciar o atendimento de forma manual e acabam presas em um ciclo de respostas lentas e perda de informacoes. Veja como a UnIO transforma sua operacao:
+                    </p>
+                </div>
+
+                <div class="comparison-table-wrapper">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Recurso</th>
+                                <th>Atendimento Tradicional</th>
+                                <th>Com a Plataforma UnIO</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Centralizacao</td>
+                                <td><span class="icon-bad">&#10060;</span> Varias abas abertas e celulares espalhados pela mesa.</td>
+                                <td><span class="icon-good">&#10004;</span> WhatsApp, Instagram e Facebook em uma unica tela.</td>
+                            </tr>
+                            <tr>
+                                <td>Equipe</td>
+                                <td><span class="icon-bad">&#10060;</span> Varios atendentes dividindo o mesmo aparelho ou senha.</td>
+                                <td><span class="icon-good">&#10004;</span> Acessos individuais e simultaneos para todo o time.</td>
+                            </tr>
+                            <tr>
+                                <td>Colaboracao</td>
+                                <td><span class="icon-bad">&#10060;</span> Mensagens internas via "grito" ou grupos paralelos.</td>
+                                <td><span class="icon-good">&#10004;</span> Notas Privadas no chat do cliente que so sua equipe ve.</td>
+                            </tr>
+                            <tr>
+                                <td>Agilidade</td>
+                                <td><span class="icon-bad">&#10060;</span> Digitacao manual de cada resposta repetitiva.</td>
+                                <td><span class="icon-good">&#10004;</span> Respostas Rapidas com um clique para perguntas frequentes.</td>
+                            </tr>
+                            <tr>
+                                <td>Gestao</td>
+                                <td><span class="icon-bad">&#10060;</span> Voce nao sabe quem atendeu ou quanto tempo levou.</td>
+                                <td><span class="icon-good">&#10004;</span> Relatorios detalhados de produtividade e tempo de resposta.</td>
+                            </tr>
+                            <tr>
+                                <td>Organizacao</td>
+                                <td><span class="icon-bad">&#10060;</span> Leads perdidos em conversas que "subiram" no feed.</td>
+                                <td><span class="icon-good">&#10004;</span> Etiquetas de status (Venda, Suporte, Urgente) para priorizar.</td>
+                            </tr>
+                            <tr>
+                                <td>Mobilidade</td>
+                                <td><span class="icon-bad">&#10060;</span> Dependencia de um unico celular fisico ligado.</td>
+                                <td><span class="icon-good">&#10004;</span> App Mobile oficial para atender de qualquer lugar.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="comparison-cta">
+                    <a href="#contato" class="btn btn-unio">Quero o nivel de organizacao da UnIO</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Differentials Section -->
+        <section class="differentials">
+            <div class="differentials-content">
+                <div class="differentials-header">
+                    <h2 class="section-title">Diferenciais Estrategicos</h2>
+                    <p class="differentials-quote">"A tecnologia que as grandes empresas usam, agora ao seu alcance."</p>
+                </div>
+
+                <div class="differentials-grid">
+                    <div class="differential-card">
+                        <h4><span>&#128214;</span> Historico Completo</h4>
+                        <p>Nunca mais pergunte "o que ja foi conversado?". Tenha o contexto total da jornada do cliente em uma unica tela.</p>
+                    </div>
+
+                    <div class="differential-card">
+                        <h4><span>&#127760;</span> Multiplos Canais, Uma So Interface</h4>
+                        <p>Integre o chat do seu site (Live Chat) as redes sociais e tenha um hub completo de comunicacao.</p>
+                    </div>
+
+                    <div class="differential-card">
+                        <h4><span>&#128274;</span> Privacidade e Estabilidade</h4>
+                        <p>Hospedagem em ambiente seguro, garantindo que seus dados e os de seus clientes estejam sempre protegidos e disponiveis.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq">
+            <div class="faq-content">
+                <div class="faq-header">
+                    <h2 class="section-title">Perguntas Frequentes</h2>
+                </div>
+
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Posso ter varios atendentes no mesmo numero de WhatsApp?
+                        </div>
+                        <p class="faq-answer">
+                            Sim! Com a UnIO, toda a sua equipe compartilha o mesmo acesso, cada um com seu login, mas respondendo pelo canal oficial da empresa.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Funciona no Instagram e Facebook?
+                        </div>
+                        <p class="faq-answer">
+                            Com certeza. A UnIO integra-se diretamente as APIs oficiais para garantir que nenhuma mensagem se perca entre as redes.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            E dificil de configurar?
+                        </div>
+                        <p class="faq-answer">
+                            Nao! Nossa equipe cuida de toda a implantacao para voce. Em poucos dias, sua empresa esta operando com a UnIO de forma completa.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            Posso testar antes de contratar?
+                        </div>
+                        <p class="faq-answer">
+                            Sim, oferecemos uma demonstracao personalizada para voce conhecer todas as funcionalidades e ver como a UnIO se adapta ao seu negocio.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section id="contato" class="final-cta">
+            <div class="final-cta-content">
+                <h2>Pronto para unificar sua comunicacao?</h2>
+                <p>
+                    Pare de gerenciar janelas e comece a gerenciar relacionamentos. Transforme seu atendimento em uma maquina de vendas com a UnIO.
+                </p>
+                <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20a%20UnIO" class="btn btn-white" target="_blank">
+                    Quero minha conta UnIO agora
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">LAB904</div>
+            <p class="footer-text">UnIO - Plataforma de Atendimento Omnichannel</p>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Lab904. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script>
+        // Delay escalonado nas mensagens da inbox
+        document.querySelectorAll('.inbox-message').forEach((msg, index) => {
+            msg.style.animationDelay = `${index * 0.2}s`;
+        });
+
+        // Observar elementos para animacao
+        observeElements('.feature-card, .differential-card, .faq-item, .channel-badge');
+    </script>
+</body>
+</html>
