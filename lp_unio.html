@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UnIO - Plataforma de Atendimento Omnichannel | Lab904</title>
-    <meta name="description" content="UnIO: Centralize WhatsApp, Instagram e Facebook em uma plataforma inteligente. Pare de pular de aba em aba e transforme seu atendimento em uma máquina de vendas.">
+    <meta name="description"
+        content="UnIO: Centralize WhatsApp, Instagram e Facebook em uma plataforma inteligente. Pare de pular de aba em aba e transforme seu atendimento em uma máquina de vendas.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
         /* === UnIO Brand Colors === */
@@ -168,8 +172,15 @@
         }
 
         @keyframes slideIn {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
+            from {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
 
         .message-icon {
@@ -424,7 +435,7 @@
             color: var(--unio-primary);
         }
 
-        .feature-card > p {
+        .feature-card>p {
             color: var(--color-text-dim);
             line-height: 1.7;
             margin-bottom: 1rem;
@@ -729,13 +740,16 @@
         }
 
         .footer-logo {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
             background: linear-gradient(135deg, var(--unio-primary), var(--unio-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            -webkit-mask-image: url('assets/images/core/lab904-logo.svg');
+            mask-image: url('assets/images/core/lab904-logo.svg');
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            width: 170px;
+            height: 30px;
+            margin: 0 auto 1rem;
         }
 
         .footer-text {
@@ -806,12 +820,13 @@
         }
     </style>
 </head>
+
 <body>
     <div class="bg-gradient"></div>
 
     <header>
         <nav>
-            <a href="index.html" class="logo">LAB904</a>
+            <a href="index.html" class="logo" aria-label="LAB904"></a>
             <ul class="nav-links">
                 <li class="has-dropdown">
                     <a href="index.html#produtos" class="active">Produtos</a>
@@ -834,7 +849,8 @@
                                     <li>
                                         <a href="lp_unio.html">
                                             <div class="submenu-title">UnIO</div>
-                                            <div class="submenu-desc">Plataforma de Gestao Omnichannel de Mensagens</div>
+                                            <div class="submenu-desc">Plataforma de Gestao Omnichannel de Mensagens
+                                            </div>
                                         </a>
                                     </li>
                                 </ul>
@@ -896,7 +912,8 @@
                         <span class="hero-highlight">UnIO</span>: Todas as suas conversas em um unico lugar.
                     </h1>
                     <p>
-                        Pare de pular de aba em aba. Centralize WhatsApp, Instagram e Facebook em uma plataforma inteligente e de a sua equipe o superpoder da produtividade.
+                        Pare de pular de aba em aba. Centralize WhatsApp, Instagram e Facebook em uma plataforma
+                        inteligente e de a sua equipe o superpoder da produtividade.
                     </p>
                     <div class="hero-cta">
                         <a href="#contato" class="btn btn-unio">
@@ -962,7 +979,9 @@
             <div class="problem-content">
                 <h2 class="section-title">Sua empresa esta perdendo vendas no caos das notificacoes?</h2>
                 <p class="problem-text">
-                    Responder um cliente no Direct, outro no WhatsApp e um terceiro no Messenger exige tempo e foco que sua equipe nao tem. <strong>Mensagens esquecidas e respostas lentas sao o caminho mais curto para perder um cliente para a concorrencia.</strong>
+                    Responder um cliente no Direct, outro no WhatsApp e um terceiro no Messenger exige tempo e foco que
+                    sua equipe nao tem. <strong>Mensagens esquecidas e respostas lentas sao o caminho mais curto para
+                        perder um cliente para a concorrencia.</strong>
                 </p>
             </div>
         </section>
@@ -974,7 +993,8 @@
                     <h2 class="section-title">UnIO: A uniao perfeita entre simplicidade e controle</h2>
                     <p class="solution-tagline">Apresentando a solucao</p>
                     <p class="solution-description">
-                        A UnIO e uma plataforma de atendimento Omnichannel desenhada para empresas que precisam de organizacao profissional sem a complexidade de sistemas engessados.
+                        A UnIO e uma plataforma de atendimento Omnichannel desenhada para empresas que precisam de
+                        organizacao profissional sem a complexidade de sistemas engessados.
                     </p>
                 </div>
 
@@ -982,7 +1002,8 @@
                     <div class="inbox-feature-text">
                         <h3><span>&#128229;</span> Inbox Unificada</h3>
                         <p>
-                            Nao importa por onde o cliente venha. Todas as mensagens caem em uma fila unica e organizada. Sua equipe visualiza e responde tudo de dentro da UnIO.
+                            Nao importa por onde o cliente venha. Todas as mensagens caem em uma fila unica e
+                            organizada. Sua equipe visualiza e responde tudo de dentro da UnIO.
                         </p>
                     </div>
                     <div class="inbox-visual">
@@ -1022,8 +1043,10 @@
                         <div class="feature-icon">&#128101;</div>
                         <h3>Colaboracao em Tempo Real</h3>
                         <ul class="feature-list">
-                            <li><strong>Notas Privadas:</strong> Converse internamente com sua equipe dentro do chat do cliente sem que ele veja. Ideal para tirar duvidas rapidas antes de responder.</li>
-                            <li><strong>Atribuicao Automatica:</strong> Direcione as conversas para o atendente disponivel ou para o setor responsavel (Vendas, Suporte, Financeiro).</li>
+                            <li><strong>Notas Privadas:</strong> Converse internamente com sua equipe dentro do chat do
+                                cliente sem que ele veja. Ideal para tirar duvidas rapidas antes de responder.</li>
+                            <li><strong>Atribuicao Automatica:</strong> Direcione as conversas para o atendente
+                                disponivel ou para o setor responsavel (Vendas, Suporte, Financeiro).</li>
                         </ul>
                     </div>
 
@@ -1031,8 +1054,10 @@
                         <div class="feature-icon">&#9889;</div>
                         <h3>Agilidade que Converte</h3>
                         <ul class="feature-list">
-                            <li><strong>Respostas Rapidas:</strong> Crie atalhos para as perguntas mais frequentes e responda em segundos com um padrao de excelencia.</li>
-                            <li><strong>Etiquetas e Filtros:</strong> Organize seus contatos por prioridade, status da venda ou tipo de servico para nunca mais perder um lead de vista.</li>
+                            <li><strong>Respostas Rapidas:</strong> Crie atalhos para as perguntas mais frequentes e
+                                responda em segundos com um padrao de excelencia.</li>
+                            <li><strong>Etiquetas e Filtros:</strong> Organize seus contatos por prioridade, status da
+                                venda ou tipo de servico para nunca mais perder um lead de vista.</li>
                         </ul>
                     </div>
 
@@ -1065,7 +1090,8 @@
                 <div class="comparison-intro">
                     <h2 class="section-title">Pare de apagar incendios e comece a escalar seu atendimento</h2>
                     <p>
-                        Muitas empresas tentam gerenciar o atendimento de forma manual e acabam presas em um ciclo de respostas lentas e perda de informacoes. Veja como a UnIO transforma sua operacao:
+                        Muitas empresas tentam gerenciar o atendimento de forma manual e acabam presas em um ciclo de
+                        respostas lentas e perda de informacoes. Veja como a UnIO transforma sua operacao:
                     </p>
                 </div>
 
@@ -1081,38 +1107,52 @@
                         <tbody>
                             <tr>
                                 <td>Centralizacao</td>
-                                <td><span class="icon-bad">&#10060;</span> Varias abas abertas e celulares espalhados pela mesa.</td>
-                                <td><span class="icon-good">&#10004;</span> WhatsApp, Instagram e Facebook em uma unica tela.</td>
+                                <td><span class="icon-bad">&#10060;</span> Varias abas abertas e celulares espalhados
+                                    pela mesa.</td>
+                                <td><span class="icon-good">&#10004;</span> WhatsApp, Instagram e Facebook em uma unica
+                                    tela.</td>
                             </tr>
                             <tr>
                                 <td>Equipe</td>
-                                <td><span class="icon-bad">&#10060;</span> Varios atendentes dividindo o mesmo aparelho ou senha.</td>
-                                <td><span class="icon-good">&#10004;</span> Acessos individuais e simultaneos para todo o time.</td>
+                                <td><span class="icon-bad">&#10060;</span> Varios atendentes dividindo o mesmo aparelho
+                                    ou senha.</td>
+                                <td><span class="icon-good">&#10004;</span> Acessos individuais e simultaneos para todo
+                                    o time.</td>
                             </tr>
                             <tr>
                                 <td>Colaboracao</td>
-                                <td><span class="icon-bad">&#10060;</span> Mensagens internas via "grito" ou grupos paralelos.</td>
-                                <td><span class="icon-good">&#10004;</span> Notas Privadas no chat do cliente que so sua equipe ve.</td>
+                                <td><span class="icon-bad">&#10060;</span> Mensagens internas via "grito" ou grupos
+                                    paralelos.</td>
+                                <td><span class="icon-good">&#10004;</span> Notas Privadas no chat do cliente que so sua
+                                    equipe ve.</td>
                             </tr>
                             <tr>
                                 <td>Agilidade</td>
-                                <td><span class="icon-bad">&#10060;</span> Digitacao manual de cada resposta repetitiva.</td>
-                                <td><span class="icon-good">&#10004;</span> Respostas Rapidas com um clique para perguntas frequentes.</td>
+                                <td><span class="icon-bad">&#10060;</span> Digitacao manual de cada resposta repetitiva.
+                                </td>
+                                <td><span class="icon-good">&#10004;</span> Respostas Rapidas com um clique para
+                                    perguntas frequentes.</td>
                             </tr>
                             <tr>
                                 <td>Gestao</td>
-                                <td><span class="icon-bad">&#10060;</span> Voce nao sabe quem atendeu ou quanto tempo levou.</td>
-                                <td><span class="icon-good">&#10004;</span> Relatorios detalhados de produtividade e tempo de resposta.</td>
+                                <td><span class="icon-bad">&#10060;</span> Voce nao sabe quem atendeu ou quanto tempo
+                                    levou.</td>
+                                <td><span class="icon-good">&#10004;</span> Relatorios detalhados de produtividade e
+                                    tempo de resposta.</td>
                             </tr>
                             <tr>
                                 <td>Organizacao</td>
-                                <td><span class="icon-bad">&#10060;</span> Leads perdidos em conversas que "subiram" no feed.</td>
-                                <td><span class="icon-good">&#10004;</span> Etiquetas de status (Venda, Suporte, Urgente) para priorizar.</td>
+                                <td><span class="icon-bad">&#10060;</span> Leads perdidos em conversas que "subiram" no
+                                    feed.</td>
+                                <td><span class="icon-good">&#10004;</span> Etiquetas de status (Venda, Suporte,
+                                    Urgente) para priorizar.</td>
                             </tr>
                             <tr>
                                 <td>Mobilidade</td>
-                                <td><span class="icon-bad">&#10060;</span> Dependencia de um unico celular fisico ligado.</td>
-                                <td><span class="icon-good">&#10004;</span> App Mobile oficial para atender de qualquer lugar.</td>
+                                <td><span class="icon-bad">&#10060;</span> Dependencia de um unico celular fisico
+                                    ligado.</td>
+                                <td><span class="icon-good">&#10004;</span> App Mobile oficial para atender de qualquer
+                                    lugar.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -1129,23 +1169,27 @@
             <div class="differentials-content">
                 <div class="differentials-header">
                     <h2 class="section-title">Diferenciais Estrategicos</h2>
-                    <p class="differentials-quote">"A tecnologia que as grandes empresas usam, agora ao seu alcance."</p>
+                    <p class="differentials-quote">"A tecnologia que as grandes empresas usam, agora ao seu alcance."
+                    </p>
                 </div>
 
                 <div class="differentials-grid">
                     <div class="differential-card">
                         <h4><span>&#128214;</span> Historico Completo</h4>
-                        <p>Nunca mais pergunte "o que ja foi conversado?". Tenha o contexto total da jornada do cliente em uma unica tela.</p>
+                        <p>Nunca mais pergunte "o que ja foi conversado?". Tenha o contexto total da jornada do cliente
+                            em uma unica tela.</p>
                     </div>
 
                     <div class="differential-card">
                         <h4><span>&#127760;</span> Multiplos Canais, Uma So Interface</h4>
-                        <p>Integre o chat do seu site (Live Chat) as redes sociais e tenha um hub completo de comunicacao.</p>
+                        <p>Integre o chat do seu site (Live Chat) as redes sociais e tenha um hub completo de
+                            comunicacao.</p>
                     </div>
 
                     <div class="differential-card">
                         <h4><span>&#128274;</span> Privacidade e Estabilidade</h4>
-                        <p>Hospedagem em ambiente seguro, garantindo que seus dados e os de seus clientes estejam sempre protegidos e disponiveis.</p>
+                        <p>Hospedagem em ambiente seguro, garantindo que seus dados e os de seus clientes estejam sempre
+                            protegidos e disponiveis.</p>
                     </div>
                 </div>
             </div>
@@ -1164,7 +1208,8 @@
                             Posso ter varios atendentes no mesmo numero de WhatsApp?
                         </div>
                         <p class="faq-answer">
-                            Sim! Com a UnIO, toda a sua equipe compartilha o mesmo acesso, cada um com seu login, mas respondendo pelo canal oficial da empresa.
+                            Sim! Com a UnIO, toda a sua equipe compartilha o mesmo acesso, cada um com seu login, mas
+                            respondendo pelo canal oficial da empresa.
                         </p>
                     </div>
 
@@ -1173,7 +1218,8 @@
                             Funciona no Instagram e Facebook?
                         </div>
                         <p class="faq-answer">
-                            Com certeza. A UnIO integra-se diretamente as APIs oficiais para garantir que nenhuma mensagem se perca entre as redes.
+                            Com certeza. A UnIO integra-se diretamente as APIs oficiais para garantir que nenhuma
+                            mensagem se perca entre as redes.
                         </p>
                     </div>
 
@@ -1182,7 +1228,8 @@
                             E dificil de configurar?
                         </div>
                         <p class="faq-answer">
-                            Nao! Nossa equipe cuida de toda a implantacao para voce. Em poucos dias, sua empresa esta operando com a UnIO de forma completa.
+                            Nao! Nossa equipe cuida de toda a implantacao para voce. Em poucos dias, sua empresa esta
+                            operando com a UnIO de forma completa.
                         </p>
                     </div>
 
@@ -1191,7 +1238,8 @@
                             Posso testar antes de contratar?
                         </div>
                         <p class="faq-answer">
-                            Sim, oferecemos uma demonstracao personalizada para voce conhecer todas as funcionalidades e ver como a UnIO se adapta ao seu negocio.
+                            Sim, oferecemos uma demonstracao personalizada para voce conhecer todas as funcionalidades e
+                            ver como a UnIO se adapta ao seu negocio.
                         </p>
                     </div>
                 </div>
@@ -1203,9 +1251,11 @@
             <div class="final-cta-content">
                 <h2>Pronto para unificar sua comunicacao?</h2>
                 <p>
-                    Pare de gerenciar janelas e comece a gerenciar relacionamentos. Transforme seu atendimento em uma maquina de vendas com a UnIO.
+                    Pare de gerenciar janelas e comece a gerenciar relacionamentos. Transforme seu atendimento em uma
+                    maquina de vendas com a UnIO.
                 </p>
-                <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20a%20UnIO" class="btn btn-white" target="_blank">
+                <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20a%20UnIO"
+                    class="btn btn-white" target="_blank">
                     Quero minha conta UnIO agora
                 </a>
             </div>
@@ -1214,7 +1264,7 @@
 
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">LAB904</div>
+            <div class="footer-logo"></div>
             <p class="footer-text">UnIO - Plataforma de Atendimento Omnichannel</p>
             <div class="footer-bottom">
                 <p>&copy; 2026 Lab904. Todos os direitos reservados.</p>
@@ -1233,4 +1283,5 @@
         observeElements('.feature-card, .differential-card, .faq-item, .channel-badge');
     </script>
 </body>
+
 </html>

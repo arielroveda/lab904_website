@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lab904 - Soluções em Dados, Automação e IA</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
         /* === Hero === */
@@ -109,17 +112,31 @@
         }
 
         .partner-logo {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--color-text-dim);
-            opacity: 0.6;
-            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .partner-logo img {
+            height: 52px;
+            width: auto;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+            transition: filter 0.3s ease;
+        }
+
+        [data-theme="light"] .partner-logo img {
+            filter: brightness(0);
         }
 
         .partner-logo:hover {
             opacity: 1;
-            color: var(--color-primary);
+        }
+
+        .partner-logo:hover img {
+            filter: none;
         }
 
         /* === Estatísticas === */
@@ -333,8 +350,17 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.2); opacity: 0.8; }
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 0.8;
+            }
         }
 
         .coming-soon h2 {
@@ -439,13 +465,14 @@
         }
     </style>
 </head>
+
 <body>
     <div class="bg-gradient"></div>
     <div class="grid-pattern"></div>
 
     <header>
         <nav>
-            <a href="index.html" class="logo">LAB904</a>
+            <a href="index.html" class="logo" aria-label="LAB904"></a>
             <ul class="nav-links">
                 <li class="has-dropdown">
                     <a href="#produtos">Produtos</a>
@@ -466,9 +493,10 @@
                                 <h3>Atendimento</h3>
                                 <ul class="mega-menu-items">
                                     <li>
-                                        <a href="#unio">
+                                        <a href="lp_unio.html">
                                             <div class="submenu-title">UnIO</div>
-                                            <div class="submenu-desc">Plataforma de Gestão Omnichannel de Mensagens</div>
+                                            <div class="submenu-desc">Plataforma de Gestão Omnichannel de Mensagens
+                                            </div>
                                         </a>
                                     </li>
                                 </ul>
@@ -530,7 +558,8 @@
                     <span class="hero-highlight">Dados, Automação e IA</span>
                 </h1>
                 <p>
-                    Soluções educacionais de ponta e desenvolvimento customizado para empresas que querem liderar a transformação digital. Da capacitação à implementação.
+                    Soluções educacionais de ponta e desenvolvimento customizado para empresas que querem liderar a
+                    transformação digital. Da capacitação à implementação.
                 </p>
                 <div class="cta-buttons">
                     <a href="#contato" class="btn btn-primary">Fale Conosco</a>
@@ -543,8 +572,8 @@
             <div class="partners-content">
                 <h3>Confiados por Empresas Líderes</h3>
                 <div class="partners-logos">
-                    <div class="partner-logo">ALURA</div>
-                    <div class="partner-logo">FIAP</div>
+                    <div class="partner-logo"><img src="assets/images/customers/alura-logo.png" alt="Alura"></div>
+                    <div class="partner-logo"><img src="assets/images/customers/fiap-logo.png" alt="FIAP"></div>
                 </div>
             </div>
         </section>
@@ -601,37 +630,43 @@
                     <div class="service-card">
                         <div class="service-icon">📊</div>
                         <h3>Educação em Dados</h3>
-                        <p>Cursos e palestras in-company sobre análise de dados, visualização e estratégias data-driven para transformar sua equipe em especialistas.</p>
+                        <p>Cursos e palestras in-company sobre análise de dados, visualização e estratégias data-driven
+                            para transformar sua equipe em especialistas.</p>
                     </div>
 
                     <div class="service-card">
                         <div class="service-icon">🤖</div>
                         <h3>Treinamentos em IA</h3>
-                        <p>Capacitação completa em Inteligência Artificial, desde conceitos fundamentais até implementações práticas com as tecnologias mais recentes.</p>
+                        <p>Capacitação completa em Inteligência Artificial, desde conceitos fundamentais até
+                            implementações práticas com as tecnologias mais recentes.</p>
                     </div>
 
                     <div class="service-card">
                         <div class="service-icon">⚡</div>
                         <h3>Automação de Processos</h3>
-                        <p>Workshops e cursos sobre automação inteligente para otimizar operações e aumentar a produtividade da sua empresa.</p>
+                        <p>Workshops e cursos sobre automação inteligente para otimizar operações e aumentar a
+                            produtividade da sua empresa.</p>
                     </div>
 
                     <div class="service-card">
                         <div class="service-icon">💻</div>
                         <h3>Desenvolvimento Customizado</h3>
-                        <p>Criação de soluções sob demanda em dados, automação e IA, perfeitamente adaptadas às necessidades específicas do seu negócio.</p>
+                        <p>Criação de soluções sob demanda em dados, automação e IA, perfeitamente adaptadas às
+                            necessidades específicas do seu negócio.</p>
                     </div>
 
                     <div class="service-card">
                         <div class="service-icon">🎯</div>
                         <h3>Consultoria Estratégica</h3>
-                        <p>Assessoria especializada para definir e implementar estratégias de transformação digital com foco em resultados mensuráveis.</p>
+                        <p>Assessoria especializada para definir e implementar estratégias de transformação digital com
+                            foco em resultados mensuráveis.</p>
                     </div>
 
                     <div class="service-card">
                         <div class="service-icon">📈</div>
                         <h3>Palestras Corporativas</h3>
-                        <p>Palestras inspiradoras sobre tendências em tecnologia, inovação e casos de sucesso para engajar e capacitar suas equipes.</p>
+                        <p>Palestras inspiradoras sobre tendências em tecnologia, inovação e casos de sucesso para
+                            engajar e capacitar suas equipes.</p>
                     </div>
                 </div>
             </div>
@@ -641,7 +676,8 @@
             <div class="coming-soon-content">
                 <h2>Soluções de IA Prontas para o Mercado</h2>
                 <p>
-                    Em breve, lançaremos produtos de Inteligência Artificial prontos para uso, desenvolvidos para resolver desafios reais do mercado brasileiro.
+                    Em breve, lançaremos produtos de Inteligência Artificial prontos para uso, desenvolvidos para
+                    resolver desafios reais do mercado brasileiro.
                 </p>
                 <span class="coming-soon-badge">Em Desenvolvimento</span>
             </div>
@@ -651,7 +687,8 @@
             <div class="cta-box">
                 <h2>Pronto para Transformar seu Negócio?</h2>
                 <p>
-                    Entre em contato e descubra como a Lab904 pode ajudar sua empresa a alcançar novos patamares com tecnologia de ponta.
+                    Entre em contato e descubra como a Lab904 pode ajudar sua empresa a alcançar novos patamares com
+                    tecnologia de ponta.
                 </p>
                 <div class="cta-buttons">
                     <a href="mailto:contato@lab904.com" class="btn btn-primary">Entrar em Contato</a>
@@ -663,8 +700,9 @@
     <footer>
         <div class="footer-content">
             <div class="footer-brand">
-                <h3>LAB904</h3>
-                <p>Soluções educacionais e tecnológicas em Dados, Automação e Inteligência Artificial para empresas que querem inovar.</p>
+                <h3></h3>
+                <p>Soluções educacionais e tecnológicas em Dados, Automação e Inteligência Artificial para empresas que
+                    querem inovar.</p>
             </div>
 
             <div class="footer-links">
@@ -707,9 +745,9 @@
         let hasAnimated = false;
 
         function animateCounter(element) {
-            const target    = parseInt(element.getAttribute('data-target'));
+            const target = parseInt(element.getAttribute('data-target'));
             const increment = target / (2000 / 16);
-            let   current   = 0;
+            let current = 0;
 
             (function update() {
                 current += increment;
@@ -736,4 +774,5 @@
         observeElements('.stat-item', 0.15);
     </script>
 </body>
+
 </html>

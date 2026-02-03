@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tina - IA para Odontologia e Estética | Lab904</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
         /* === Btn Overrides === */
@@ -103,8 +106,15 @@
         }
 
         @keyframes messagePop {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
         .chat-bubble.user {
@@ -453,13 +463,16 @@
         }
 
         .footer-logo {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
             background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            -webkit-mask-image: url('assets/images/core/lab904-logo.svg');
+            mask-image: url('assets/images/core/lab904-logo.svg');
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            width: 170px;
+            height: 30px;
+            margin: 0 auto 1rem;
         }
 
         .footer-text {
@@ -518,12 +531,13 @@
         }
     </style>
 </head>
+
 <body>
     <div class="bg-gradient"></div>
 
     <header>
         <nav>
-            <a href="index.html" class="logo">LAB904</a>
+            <a href="index.html" class="logo" aria-label="LAB904"></a>
             <ul class="nav-links">
                 <li class="has-dropdown">
                     <a href="index.html#produtos" class="active">Produtos</a>
@@ -544,9 +558,10 @@
                                 <h3>Atendimento</h3>
                                 <ul class="mega-menu-items">
                                     <li>
-                                        <a href="#unio">
+                                        <a href="lp_unio.html">
                                             <div class="submenu-title">UnIO</div>
-                                            <div class="submenu-desc">Plataforma de Gestão Omnichannel de Mensagens</div>
+                                            <div class="submenu-desc">Plataforma de Gestão Omnichannel de Mensagens
+                                            </div>
                                         </a>
                                     </li>
                                 </ul>
@@ -608,7 +623,8 @@
                         Conheça a <span class="hero-highlight">Tina</span>.
                     </h1>
                     <p>
-                        A assistente de IA que gerencia sua agenda, tira dúvidas e converte leads 24h por dia, com a naturalidade de um atendimento humano.
+                        A assistente de IA que gerencia sua agenda, tira dúvidas e converte leads 24h por dia, com a
+                        naturalidade de um atendimento humano.
                     </p>
                     <div class="hero-cta">
                         <a href="#trial" class="btn btn-primary">
@@ -624,9 +640,11 @@
                     <div class="phone-mockup">
                         <div class="phone-screen">
                             <div class="chat-bubble user">Olá! Gostaria de agendar uma consulta</div>
-                            <div class="chat-bubble tina">Olá! Claro, vou te ajudar com isso 😊 Para qual especialidade você gostaria de agendar?</div>
+                            <div class="chat-bubble tina">Olá! Claro, vou te ajudar com isso 😊 Para qual especialidade
+                                você gostaria de agendar?</div>
                             <div class="chat-bubble user">Ortodontia</div>
-                            <div class="chat-bubble tina">Perfeito! Temos disponibilidade para ortodontia. Você prefere qual período: manhã, tarde ou noite?</div>
+                            <div class="chat-bubble tina">Perfeito! Temos disponibilidade para ortodontia. Você prefere
+                                qual período: manhã, tarde ou noite?</div>
                         </div>
                     </div>
                 </div>
@@ -641,14 +659,18 @@
                     <div class="comparison-card problem">
                         <h3>😰 Seu Desafio</h3>
                         <p>
-                            Sua clínica não para, mas sua secretária precisa descansar. Enquanto você atende, mensagens acumulam no WhatsApp e no Instagram. Pacientes que não recebem resposta imediata procuram o concorrente.
+                            Sua clínica não para, mas sua secretária precisa descansar. Enquanto você atende, mensagens
+                            acumulam no WhatsApp e no Instagram. Pacientes que não recebem resposta imediata procuram o
+                            concorrente.
                         </p>
                     </div>
 
                     <div class="comparison-card solution">
                         <h3>✨ Nossa Solução</h3>
                         <p>
-                            A Tina chega para ocupar essa lacuna. Ela não é apenas um "robô de mensagens", é uma inteligência especializada em Odontologia e Estética desenhada para oferecer uma experiência de acolhimento e eficiência.
+                            A Tina chega para ocupar essa lacuna. Ela não é apenas um "robô de mensagens", é uma
+                            inteligência especializada em Odontologia e Estética desenhada para oferecer uma experiência
+                            de acolhimento e eficiência.
                         </p>
                     </div>
                 </div>
@@ -664,9 +686,13 @@
                         <div class="feature-icon">🧠</div>
                         <h3>Inteligência que entende o contexto</h3>
                         <ul class="feature-list">
-                            <li><strong>Linguagem Humana:</strong> Esqueça menus engessados ("type 1 para..."). A Tina entende frases complexas, emula o ritmo de digitação humano e envia respostas graduais.</li>
-                            <li><strong>Escuta Atenta:</strong> Se o seu paciente prefere enviar áudio, a Tina ouve e compreende cada detalhe do pedido.</li>
-                            <li><strong>Esclarecimento de Dúvidas:</strong> Ela atua como uma consultora técnica, explicando procedimentos e tranquilizando o paciente antes mesmo do agendamento.</li>
+                            <li><strong>Linguagem Humana:</strong> Esqueça menus engessados ("type 1 para..."). A Tina
+                                entende frases complexas, emula o ritmo de digitação humano e envia respostas graduais.
+                            </li>
+                            <li><strong>Escuta Atenta:</strong> Se o seu paciente prefere enviar áudio, a Tina ouve e
+                                compreende cada detalhe do pedido.</li>
+                            <li><strong>Esclarecimento de Dúvidas:</strong> Ela atua como uma consultora técnica,
+                                explicando procedimentos e tranquilizando o paciente antes mesmo do agendamento.</li>
                         </ul>
                     </div>
 
@@ -674,8 +700,10 @@
                         <div class="feature-icon">📅</div>
                         <h3>Gestão de Agenda Impecável</h3>
                         <ul class="feature-list">
-                            <li><strong>Multiespecialistas:</strong> Gerencia simultaneamente as agendas de diversos profissionais ou unidades da sua rede.</li>
-                            <li><strong>Autonomia Total:</strong> Marca, desmarca e remarca horários diretamente no sistema, sem intervenção manual.</li>
+                            <li><strong>Multiespecialistas:</strong> Gerencia simultaneamente as agendas de diversos
+                                profissionais ou unidades da sua rede.</li>
+                            <li><strong>Autonomia Total:</strong> Marca, desmarca e remarca horários diretamente no
+                                sistema, sem intervenção manual.</li>
                         </ul>
                     </div>
 
@@ -683,8 +711,10 @@
                         <div class="feature-icon">📈</div>
                         <h3>Foco em Crescimento e Vendas</h3>
                         <ul class="feature-list">
-                            <li><strong>Disponibilidade 24/7:</strong> Ideal para captar leads de campanhas de tráfego pago que chegam à noite ou nos finais de semana.</li>
-                            <li><strong>Gestão de Leads:</strong> Cadastra automaticamente todos os contatos. Se um lead não converteu hoje, você tem os dados para ações futuras de reengajamento.</li>
+                            <li><strong>Disponibilidade 24/7:</strong> Ideal para captar leads de campanhas de tráfego
+                                pago que chegam à noite ou nos finais de semana.</li>
+                            <li><strong>Gestão de Leads:</strong> Cadastra automaticamente todos os contatos. Se um lead
+                                não converteu hoje, você tem os dados para ações futuras de reengajamento.</li>
                             <li><strong>Omnichannel:</strong> Atendimento unificado no WhatsApp e Instagram.</li>
                         </ul>
                     </div>
@@ -700,17 +730,20 @@
                 <div class="customization-features">
                     <div class="custom-item">
                         <h4>🎨 Identidade Própria</h4>
-                        <p>Você pode mudar o nome da inteligência para o nome da sua clínica ou de uma assistente virtual específica.</p>
+                        <p>Você pode mudar o nome da inteligência para o nome da sua clínica ou de uma assistente
+                            virtual específica.</p>
                     </div>
 
                     <div class="custom-item">
                         <h4>🔗 Integração Facilitada</h4>
-                        <p>Durante a implantação, conectamos a Tina aos seus sistemas de gestão atuais para que o fluxo de dados seja contínuo e sem erros.</p>
+                        <p>Durante a implantação, conectamos a Tina aos seus sistemas de gestão atuais para que o fluxo
+                            de dados seja contínuo e sem erros.</p>
                     </div>
 
                     <div class="custom-item">
                         <h4>📊 Escalável</h4>
-                        <p>Não importa se você é um consultório individual ou uma rede de franquias; a Tina acompanha o seu volume de demanda.</p>
+                        <p>Não importa se você é um consultório individual ou uma rede de franquias; a Tina acompanha o
+                            seu volume de demanda.</p>
                     </div>
                 </div>
             </div>
@@ -739,9 +772,11 @@
                 <div class="trial-box">
                     <h3>Teste você mesmo a inteligência da Tina</h3>
                     <p>
-                        A melhor forma de entender o potencial da Tina é conversando com ela. Veja como ela lida com perguntas difíceis, entende gírias e organiza horários com precisão cirúrgica.
+                        A melhor forma de entender o potencial da Tina é conversando com ela. Veja como ela lida com
+                        perguntas difíceis, entende gírias e organiza horários com precisão cirúrgica.
                     </p>
-                    <a href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20testar%20a%20Tina" class="btn btn-primary" target="_blank">
+                    <a href="https://wa.me/5511999999999?text=Olá!%20Gostaria%20de%20testar%20a%20Tina"
+                        class="btn btn-primary" target="_blank">
                         💬 Falar com a Tina agora (Simular Paciente)
                     </a>
                 </div>
@@ -752,9 +787,11 @@
             <div class="final-cta-content">
                 <h2>Pronto para transformar a gestão do seu consultório?</h2>
                 <p>
-                    Leve a tecnologia da Lab904 para a sua recepção e foque no que você faz de melhor: cuidar dos seus pacientes.
+                    Leve a tecnologia da Lab904 para a sua recepção e foque no que você faz de melhor: cuidar dos seus
+                    pacientes.
                 </p>
-                <a href="https://wa.me/5511999999999?text=Olá!%20Quero%20contratar%20a%20Tina%20para%20minha%20clínica" class="btn btn-white" target="_blank">
+                <a href="https://wa.me/5511999999999?text=Olá!%20Quero%20contratar%20a%20Tina%20para%20minha%20clínica"
+                    class="btn btn-white" target="_blank">
                     🚀 Chame agora a nossa equipe e contrate a Tina
                 </a>
             </div>
@@ -763,7 +800,7 @@
 
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">LAB904</div>
+            <div class="footer-logo"></div>
             <p class="footer-text">Tina - IA especializada em Odontologia e Estética</p>
             <div class="footer-bottom">
                 <p>&copy; 2026 Lab904. Todos os direitos reservados.</p>
@@ -781,4 +818,5 @@
         observeElements('.feature-card, .comparison-card, .custom-item');
     </script>
 </body>
+
 </html>

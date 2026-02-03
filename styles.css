@@ -67,8 +67,17 @@ body {
 }
 
 @keyframes gradientShift {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.8; transform: scale(1.1); }
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
 }
 
 .grid-pattern {
@@ -93,8 +102,13 @@ body {
 }
 
 @keyframes gridMove {
-    0% { transform: translate(0, 0); }
-    100% { transform: translate(50px, 50px); }
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(50px, 50px);
+    }
 }
 
 /* === Header & Navegação === */
@@ -125,15 +139,33 @@ nav {
 }
 
 .logo {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.5rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    letter-spacing: -0.02em;
+    display: inline-flex;
+    align-items: center;
     text-decoration: none;
+    width: 136px;
+    height: 24px;
+    background-image: url('assets/images/core/lab904-logo.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
+}
+
+[data-theme="light"] .logo {
+    filter: brightness(0);
+}
+
+.logo img {
+    width: 136px;
+    height: 24px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
+}
+
+[data-theme="light"] .logo img {
+    filter: brightness(0);
 }
 
 .nav-actions {
@@ -147,7 +179,7 @@ nav {
     list-style: none;
 }
 
-.nav-links > li {
+.nav-links>li {
     position: relative;
 }
 
@@ -162,7 +194,7 @@ nav {
     padding: 0.5rem 0;
 }
 
-.nav-links > li > a::after {
+.nav-links>li>a::after {
     content: '';
     position: absolute;
     bottom: -5px;
@@ -173,25 +205,25 @@ nav {
     transition: width 0.3s ease;
 }
 
-.nav-links > li > a:hover,
-.nav-links > li > a.active {
+.nav-links>li>a:hover,
+.nav-links>li>a.active {
     color: var(--color-primary);
 }
 
-.nav-links > li > a:hover::after,
-.nav-links > li > a.active::after {
+.nav-links>li>a:hover::after,
+.nav-links>li>a.active::after {
     width: 100%;
 }
 
 /* Mega Menu */
-.has-dropdown > a::before {
+.has-dropdown>a::before {
     content: '▾';
     margin-left: 0.5rem;
     font-size: 0.8rem;
     transition: transform 0.3s ease;
 }
 
-.has-dropdown:hover > a::before {
+.has-dropdown:hover>a::before {
     transform: rotate(180deg);
 }
 
@@ -316,8 +348,15 @@ nav {
 
 /* === Animações === */
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* === Botões === */
@@ -374,13 +413,19 @@ footer {
 }
 
 .footer-brand h3 {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    display: inline-block;
+    width: 159px;
+    height: 28px;
+    background-image: url('assets/images/core/lab904-logo.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
+}
+
+[data-theme="light"] .footer-brand h3 {
+    filter: brightness(0);
 }
 
 .footer-brand p {
@@ -478,7 +523,7 @@ footer {
         margin-top: 1rem;
     }
 
-    .has-dropdown > a::before {
+    .has-dropdown>a::before {
         position: absolute;
         right: -1.5rem;
     }
