@@ -5,6 +5,13 @@
 
 class NavMenu extends HTMLElement {
     connectedCallback() {
+        if (!document.querySelector('link[href*="Material+Symbols"]')) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=keyboard_arrow_down';
+            document.head.appendChild(link);
+        }
+
         const page   = this.getAttribute('page') || 'index';
         const h      = page === 'index' ? '#' : 'index.html#';
         const aProd  = (page === 'tina' || page === 'unio') ? ' class="active"' : '';
@@ -21,7 +28,7 @@ class NavMenu extends HTMLElement {
         <a href="index.html" class="logo"><img src="assets/images/core/lab904-logo.svg" alt="LAB904"></a>
         <ul class="nav-links">
             <li class="has-dropdown">
-                <a href="${h}produtos"${aProd}>Produtos</a>
+                <a href="${h}produtos"${aProd}>Produtos<span class="chevron material-symbols-outlined">keyboard_arrow_down</span></a>
                 <div class="mega-menu">
                     <div class="mega-menu-grid">
                         <div class="mega-menu-column">
@@ -50,7 +57,7 @@ class NavMenu extends HTMLElement {
                 </div>
             </li>
             <li class="has-dropdown">
-                <a href="${h}servicos">Serviços</a>
+                <a href="${h}servicos">Serviços<span class="chevron material-symbols-outlined">keyboard_arrow_down</span></a>
                 <div class="mega-menu">
                     <div class="mega-menu-grid">
                         <div class="mega-menu-column">
