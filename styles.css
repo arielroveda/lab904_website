@@ -470,8 +470,24 @@ footer {
 
 /* === Responsivo Compartilhado === */
 @media (max-width: 768px) {
+    nav {
+        position: relative;
+        justify-content: center;
+    }
+
     .menu-toggle {
         display: flex;
+        position: absolute;
+        left: 1.5rem;
+    }
+
+    .nav-actions {
+        position: absolute;
+        right: 1.5rem;
+    }
+
+    .theme-toggle {
+        margin-left: 0;
     }
 
     .nav-links {

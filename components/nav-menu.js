@@ -13,6 +13,11 @@ class NavMenu extends HTMLElement {
         this.innerHTML = `
 <header>
     <nav>
+        <button class="menu-toggle" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <a href="index.html" class="logo"><img src="assets/images/core/lab904-logo.svg" alt="LAB904"></a>
         <ul class="nav-links">
             <li class="has-dropdown">
@@ -79,11 +84,6 @@ class NavMenu extends HTMLElement {
         <div class="nav-actions">
             <button class="theme-toggle" aria-label="Alternar tema" id="themeToggle">
                 <span id="themeIcon">🌙</span>
-            </button>
-            <button class="menu-toggle" aria-label="Menu">
-                <span></span>
-                <span></span>
-                <span></span>
             </button>
         </div>
     </nav>
