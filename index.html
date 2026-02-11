@@ -151,16 +151,277 @@
             filter: none;
         }
 
-        /* === Estatísticas === */
-        .stats {
-            padding: 8rem 2rem;
+        /* === Nosso Impacto === */
+        .impact {
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .stats-content {
+        .impact::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(242, 149, 89, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .impact-wrapper {
             max-width: 1400px;
             margin: 0 auto;
+            display: flex;
+            gap: 0;
+            position: relative;
         }
 
+        /* Vertical sidebar (Excel-tab style) */
+        .impact-sidebar {
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            width: 48px;
+            align-self: stretch;
+        }
+
+        .impact-tab {
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+            padding: 0.9rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            background: var(--color-primary);
+            color: var(--color-bg);
+            border-radius: 0 8px 8px 0;
+            cursor: default;
+        }
+
+        /* Main content area */
+        .impact-main {
+            flex: 1;
+            min-width: 0;
+            padding-left: 2.5rem;
+        }
+
+        /* Header: title + description side by side */
+        .impact-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 3rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .impact-header .impact-tag {
+            margin-bottom: 0.5rem;
+        }
+
+        .impact-titles {
+            flex-shrink: 0;
+        }
+
+        .impact-tag {
+            color: var(--color-primary);
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: lowercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .impact-heading {
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--color-text);
+        }
+
+        .impact-description {
+            color: var(--color-text-dim);
+            font-size: 1.15rem;
+            line-height: 1.7;
+            max-width: 380px;
+            padding-top: 3rem;
+            padding-left: 3rem;
+            border-left: 1px solid rgba(242, 242, 242, 0.15);
+        }
+
+        /* Body: stats + photos */
+        .impact-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        /* Stats */
+        .impact-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .impact-stat-item {
+            padding: 1.2rem 0;
+            border-bottom: 2px solid rgba(242, 149, 89, 0.15);
+            transition: border-color 0.3s ease;
+        }
+
+        .impact-stat-item:hover {
+            border-bottom-color: var(--color-primary);
+        }
+
+        .impact-stat-number {
+            font-size: clamp(2.8rem, 5vw, 3.8rem);
+            font-weight: 800;
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.1;
+            color: var(--color-text);
+            transition: color 0.3s ease;
+        }
+
+        .impact-stat-item:hover .impact-stat-number {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .impact-stat-label {
+            font-size: 0.95rem;
+            color: var(--color-text-dim);
+            font-weight: 500;
+            text-transform: lowercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.15rem;
+        }
+
+        /* Row with two stats side by side */
+        .impact-stat-row {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .impact-stat-row .impact-stat-item {
+            flex: 1;
+        }
+
+        .impact-nps .impact-stat-number {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Photo circles */
+        .impact-photos {
+            position: relative;
+            min-height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .impact-photo-circle {
+            position: absolute;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .impact-photo-circle img {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* Large circle - round mask */
+        .impact-photo-circle.circle-lg {
+            width: 350px;
+            height: 350px;
+            top: 0;
+            right: 0;
+            z-index: 3;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+            border: 3px solid rgba(242, 149, 89, 0.15);
+        }
+
+        .impact-photo-circle.circle-lg img {
+            object-fit: cover;
+        }
+
+        /* Medium - irregular shape */
+        .impact-photo-circle.circle-md {
+            width: 180px;
+            bottom: 0;
+            left: 10px;
+            z-index: 2;
+        }
+
+        .impact-photo-circle.circle-md img {
+            object-fit: contain;
+        }
+
+        /* Small - irregular shape */
+        .impact-photo-circle.circle-sm {
+            width: 140px;
+            bottom: 40px;
+            left: 160px;
+            z-index: 1;
+        }
+
+        .impact-photo-circle.circle-sm img {
+            object-fit: contain;
+        }
+
+        .impact-photos:hover .circle-lg {
+            transform: scale(1.03);
+            box-shadow: 0 15px 60px rgba(242, 149, 89, 0.25);
+        }
+
+        .impact-photos:hover .circle-md {
+            transform: translate(-5px, 5px);
+        }
+
+        .impact-photos:hover .circle-sm {
+            transform: translate(5px, -5px);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, rgba(242, 149, 89, 0.08), rgba(242, 212, 146, 0.12));
+            color: var(--color-text-dim);
+            font-size: 0.8rem;
+        }
+
+        .photo-placeholder .material-symbols-outlined {
+            font-size: 2rem;
+            color: var(--color-primary);
+            opacity: 0.5;
+        }
+
+        .circle-sm .photo-placeholder .material-symbols-outlined {
+            font-size: 1.5rem;
+        }
+
+        .circle-sm .photo-placeholder span:last-child {
+            display: none;
+        }
+
+        /* Section common styles (reused by other sections) */
         .section-header {
             text-align: center;
             margin-bottom: 5rem;
@@ -186,73 +447,6 @@
             font-size: 1.2rem;
             max-width: 600px;
             margin: 0 auto;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem;
-            background: var(--color-surface);
-            border: 1px solid rgba(242, 149, 89, 0.2);
-            border-radius: 16px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-            transform: scaleX(0);
-            transition: transform 0.6s ease;
-        }
-
-        .stat-item:hover::before {
-            transform: scaleX(1);
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-            border-color: var(--color-primary);
-            box-shadow: 0 20px 60px rgba(242, 149, 89, 0.25);
-        }
-
-        .stat-number {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
-            font-family: 'JetBrains Mono', monospace;
-            line-height: 1.2;
-        }
-
-        .stat-label {
-            font-size: 1.1rem;
-            color: var(--color-text-dim);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .stat-sublabel {
-            font-size: 0.9rem;
-            color: var(--color-text-dim);
-            margin-top: 0.5rem;
-            opacity: 0.8;
         }
 
         /* === Serviços === */
@@ -434,6 +628,34 @@
         }
 
         /* === Responsivo === */
+        @media (max-width: 1024px) {
+            .impact-body {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .impact-photos {
+                min-height: 320px;
+                margin: 0 auto;
+                width: 100%;
+                max-width: 420px;
+            }
+
+            .impact-photo-circle.circle-lg {
+                width: 260px;
+                height: 260px;
+            }
+
+            .impact-photo-circle.circle-md {
+                width: 150px;
+            }
+
+            .impact-photo-circle.circle-sm {
+                width: 110px;
+                left: 120px;
+            }
+        }
+
         @media (max-width: 768px) {
             .hero {
                 padding: 6rem 1.5rem 3rem;
@@ -451,13 +673,61 @@
                 gap: 2rem;
             }
 
-            .stats-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 2rem;
+            .impact {
+                padding: 4rem 1.5rem;
             }
 
-            .stat-item {
-                padding: 1.5rem;
+            .impact-wrapper {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .impact-sidebar {
+                width: 100%;
+                align-self: auto;
+            }
+
+            .impact-tab {
+                writing-mode: horizontal-tb;
+                transform: none;
+                padding: 0.7rem 1.5rem;
+                border-radius: 8px 8px 0 0;
+                font-size: 0.65rem;
+                flex: 0;
+            }
+
+            .impact-header {
+                flex-direction: column;
+                gap: 1rem;
+                margin-bottom: 2.5rem;
+            }
+
+            .impact-description {
+                max-width: 100%;
+            }
+
+            .impact-stat-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .impact-photos {
+                min-height: 280px;
+            }
+
+            .impact-photo-circle.circle-lg {
+                width: 220px;
+                height: 220px;
+            }
+
+            .impact-photo-circle.circle-md {
+                width: 120px;
+            }
+
+            .impact-photo-circle.circle-sm {
+                width: 90px;
+                left: 100px;
+                bottom: 30px;
             }
         }
 
@@ -473,6 +743,25 @@
             .coming-soon-content,
             .cta-box {
                 padding: 3rem 2rem;
+            }
+
+            .impact-photos {
+                min-height: 240px;
+            }
+
+            .impact-photo-circle.circle-lg {
+                width: 190px;
+                height: 190px;
+            }
+
+            .impact-photo-circle.circle-md {
+                width: 100px;
+            }
+
+            .impact-photo-circle.circle-sm {
+                width: 75px;
+                left: 80px;
+                bottom: 20px;
             }
         }
     </style>
@@ -516,39 +805,63 @@
             </div>
         </section>
 
-        <section class="stats">
-            <div class="stats-content">
-                <div class="section-header">
-                    <div class="section-tag">Nosso Impacto</div>
-                    <h2 class="section-title">Números que Falam por Si</h2>
-                    <p class="section-subtitle">
-                        Resultados concretos de quem acredita na transformação através da educação
-                    </p>
+        <section class="impact" id="impacto">
+            <div class="impact-wrapper">
+                <!-- Vertical sidebar (Excel-tab) -->
+                <div class="impact-sidebar">
+                    <div class="impact-tab">PESSOAS</div>
                 </div>
 
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="230">0</div>
-                        <div class="stat-label">Horas de Aulas</div>
-                        <div class="stat-sublabel">Conteúdo de alta qualidade</div>
+                <!-- Main content area -->
+                <div class="impact-main">
+                    <!-- Header: title + description -->
+                    <div class="impact-header">
+                        <div class="impact-titles">
+                            <div class="impact-tag">nosso impacto</div>
+                            <h2 class="impact-heading">Números que<br>Falam por Si</h2>
+                        </div>
+                        <p class="impact-description">
+                            Resultados concretos de quem acredita na transformação
+                            através da educação
+                        </p>
                     </div>
 
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="300">0</div>
-                        <div class="stat-label">Alunos</div>
-                        <div class="stat-sublabel">Capacitados e transformados</div>
-                    </div>
+                    <!-- Body: stats + photos -->
+                    <div class="impact-body">
+                        <!-- Stats column -->
+                        <div class="impact-stats">
+                            <div class="impact-stat-item">
+                                <div class="impact-stat-number" data-target="230">+230</div>
+                                <div class="impact-stat-label">horas de aulas</div>
+                            </div>
+                            <div class="impact-stat-item">
+                                <div class="impact-stat-number" data-target="300">+300</div>
+                                <div class="impact-stat-label">alunos</div>
+                            </div>
+                            <div class="impact-stat-row">
+                                <div class="impact-stat-item">
+                                    <div class="impact-stat-number" data-target="1000">+1.000</div>
+                                    <div class="impact-stat-label">pessoas em palestras</div>
+                                </div>
+                                <div class="impact-stat-item impact-nps">
+                                    <div class="impact-stat-number" data-target="94">94</div>
+                                    <div class="impact-stat-label">NPS</div>
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="1000">0</div>
-                        <div class="stat-label">Pessoas em Palestras</div>
-                        <div class="stat-sublabel">Inspiradas e engajadas</div>
-                    </div>
-
-                    <div class="stat-item">
-                        <div class="stat-number" data-target="94">0</div>
-                        <div class="stat-label">NPS</div>
-                        <div class="stat-sublabel">Excelência reconhecida</div>
+                        <!-- Photo circles -->
+                        <div class="impact-photos">
+                            <div class="impact-photo-circle circle-lg">
+                                <img src="assets/images/core/ariel_microfone.svg" alt="Palestra com microfone">
+                            </div>
+                            <div class="impact-photo-circle circle-md">
+                                <img src="assets/images/core/ariel_palestra_caldeira.svg" alt="Palestra no Caldeira">
+                            </div>
+                            <div class="impact-photo-circle circle-sm">
+                                <img src="assets/images/core/ariel_palestra_thoughtworks.svg" alt="Palestra na Thoughtworks">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -679,18 +992,19 @@
     <script src="scripts.js"></script>
     <script>
         // Animação de contador para estatísticas
-        const stats = document.querySelectorAll('.stat-number');
+        const statNumbers = document.querySelectorAll('.impact-stat-number');
         let hasAnimated = false;
 
         function animateCounter(element) {
             const target = parseInt(element.getAttribute('data-target'));
-            const increment = target / (2000 / 16);
+            const duration = 2000;
+            const increment = target / (duration / 16);
             let current = 0;
 
             (function update() {
                 current += increment;
                 if (current < target) {
-                    element.textContent = Math.floor(current).toLocaleString('pt-BR');
+                    element.textContent = (target !== 94 ? '+' : '') + Math.floor(current).toLocaleString('pt-BR');
                     requestAnimationFrame(update);
                 } else {
                     element.textContent = (target !== 94 ? '+' : '') + target.toLocaleString('pt-BR');
@@ -702,14 +1016,14 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting && !hasAnimated) {
                     hasAnimated = true;
-                    stats.forEach((stat, i) => setTimeout(() => animateCounter(stat), i * 100));
+                    statNumbers.forEach((stat, i) => setTimeout(() => animateCounter(stat), i * 200));
                 }
             });
-        }, { threshold: 0.5 }).observe(document.querySelector('.stats'));
+        }, { threshold: 0.3 }).observe(document.querySelector('.impact'));
 
         // Fade-in nos cards
         observeElements('.service-card', 0.1);
-        observeElements('.stat-item', 0.15);
+        observeElements('.impact-stat-item, .impact-photo-circle', 0.15);
 
         // Typewriter effect no hero-highlight
         (function () {
