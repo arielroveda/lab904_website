@@ -52,9 +52,21 @@
         }
 
         .hero-highlight {
+            -webkit-text-fill-color: var(--color-primary);
             color: var(--color-primary);
             position: relative;
             display: inline-block;
+        }
+
+        .hero-highlight::after {
+            content: '|';
+            animation: blink-cursor 0.75s step-end infinite;
+            margin-left: 1px;
+        }
+
+        @keyframes blink-cursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
         .hero p {
@@ -479,7 +491,7 @@
                 <span class="hero-tag">🚀 Inovação em Tecnologia</span>
                 <h1>
                     Transforme seu negócio com<br>
-                    <span class="hero-highlight">Dados, Automação e IA</span>
+                    <span class="hero-highlight" id="typewriter-target"></span>
                 </h1>
                 <p>
                     Soluções educacionais de ponta e desenvolvimento customizado para empresas que querem liderar a
@@ -498,6 +510,8 @@
                 <div class="partners-logos">
                     <div class="partner-logo"><img src="assets/images/customers/alura-logo.png" alt="Alura"></div>
                     <div class="partner-logo"><img src="assets/images/customers/fiap-logo.png" alt="FIAP"></div>
+                    <div class="partner-logo"><img src="assets/images/customers/sescoop-sc-logo.webp" alt="Sescoop/SC"></div>
+                    <div class="partner-logo"><img src="assets/images/customers/wis-learntech-logo.svg" alt="WIS"></div>
                 </div>
             </div>
         </section>
@@ -652,7 +666,7 @@
                 <h4>Contato</h4>
                 <ul>
                     <li><a href="mailto:contato@lab904.com">contato@lab904.com</a></li>
-                    <li><a href="tel:+5511999999999">+55 11 99999-9999</a></li>
+                    <li><a href="tel:+5551980231225">+55 51 98023-1225</a></li>
                 </ul>
             </div>
         </div>
@@ -696,6 +710,41 @@
         // Fade-in nos cards
         observeElements('.service-card', 0.1);
         observeElements('.stat-item', 0.15);
+
+        // Typewriter effect no hero-highlight
+        (function () {
+            const words = ['Dados...', 'Inteligência Artificial...', 'Educação...', 'BI...', 'Inovação...', 'Processos...', 'Automação...', 'Analytics...', 'Estratégia...'];
+            let wordIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            const el = document.getElementById('typewriter-target');
+
+            function typewriter() {
+                const word = words[wordIndex];
+                if (!isDeleting) {
+                    charIndex++;
+                    el.textContent = word.slice(0, charIndex);
+                    if (charIndex === word.length) {
+                        isDeleting = true;
+                        setTimeout(typewriter, 1800);
+                        return;
+                    }
+                    setTimeout(typewriter, 70);
+                } else {
+                    charIndex--;
+                    el.textContent = word.slice(0, charIndex);
+                    if (charIndex === 0) {
+                        isDeleting = false;
+                        wordIndex = (wordIndex + 1) % words.length;
+                        setTimeout(typewriter, 400);
+                        return;
+                    }
+                    setTimeout(typewriter, 35);
+                }
+            }
+
+            typewriter();
+        })();
     </script>
 </body>
 
