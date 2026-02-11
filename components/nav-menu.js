@@ -8,7 +8,7 @@ class NavMenu extends HTMLElement {
         if (!document.querySelector('link[href*="Material+Symbols"]')) {
             const link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.href = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=keyboard_arrow_down';
+            link.href = 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0';
             document.head.appendChild(link);
         }
 
@@ -90,7 +90,7 @@ class NavMenu extends HTMLElement {
         </ul>
         <div class="nav-actions">
             <button class="theme-toggle" aria-label="Alternar tema" id="themeToggle">
-                <span id="themeIcon">🌙</span>
+                <span id="themeIcon"><span class="material-symbols-outlined">dark_mode</span></span>
             </button>
         </div>
     </nav>

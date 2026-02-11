@@ -11,7 +11,9 @@
     function setTheme(theme) {
         html.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
-        icon.textContent = theme === 'dark' ? '🌙' : '☀️';
+        icon.innerHTML = theme === 'dark'
+            ? '<span class="material-symbols-outlined">dark_mode</span>'
+            : '<span class="material-symbols-outlined">light_mode</span>';
     }
 
     setTheme(localStorage.getItem('theme') || 'dark');
