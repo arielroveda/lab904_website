@@ -13,7 +13,7 @@ class NavMenu extends HTMLElement {
         }
 
         const page   = this.getAttribute('page') || 'index';
-        const h      = page === 'index' ? '#' : 'index.html#';
+        const h      = page === 'index' ? '#' : '/#';
         const aProd  = (page === 'tina' || page === 'unio') ? ' class="active"' : '';
         const aAbout = page === 'about' ? ' class="active"' : '';
 
@@ -25,7 +25,7 @@ class NavMenu extends HTMLElement {
             <span></span>
             <span></span>
         </button>
-        <a href="index.html" class="logo"><img src="assets/images/core/lab904-logo.svg" alt="LAB904"></a>
+        <a href="/" class="logo"><img src="/assets/images/core/lab904-logo.svg" alt="LAB904"></a>
         <ul class="nav-links">
             <li class="has-dropdown">
                 <a href="${h}produtos"${aProd}>Produtos<span class="chevron material-symbols-outlined">keyboard_arrow_down</span></a>
@@ -35,7 +35,7 @@ class NavMenu extends HTMLElement {
                             <h3>Saúde</h3>
                             <ul class="mega-menu-items">
                                 <li>
-                                    <a href="lp_tina.html">
+                                    <a href="/products/tina/">
                                         <div class="submenu-title">Tina</div>
                                         <div class="submenu-desc">IA para Odontologia e Estética</div>
                                     </a>
@@ -46,7 +46,7 @@ class NavMenu extends HTMLElement {
                             <h3>Atendimento</h3>
                             <ul class="mega-menu-items">
                                 <li>
-                                    <a href="lp_unio.html">
+                                    <a href="/products/unio/">
                                         <div class="submenu-title">UnIO</div>
                                         <div class="submenu-desc">Plataforma de Gestão Omnichannel de Mensagens</div>
                                     </a>
@@ -85,7 +85,7 @@ class NavMenu extends HTMLElement {
                     </div>
                 </div>
             </li>
-            <li><a href="about.html"${aAbout}>Sobre</a></li>
+            <li><a href="/about/"${aAbout}>Sobre</a></li>
             <li><a href="${h}contato">Contato</a></li>
         </ul>
         <div class="nav-actions">
