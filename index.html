@@ -10,6 +10,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
         rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
         /* === Hero === */
@@ -225,6 +227,8 @@
 
         .impact-titles {
             flex-shrink: 0;
+            padding-right: 3rem;
+            border-right: 1px solid rgba(242, 242, 242, 0.15);
         }
 
         .impact-tag {
@@ -249,8 +253,6 @@
             line-height: 1.7;
             max-width: 380px;
             padding-top: 3rem;
-            padding-left: 3rem;
-            border-left: 1px solid rgba(242, 242, 242, 0.15);
         }
 
         /* Body: stats + photos */
@@ -670,7 +672,13 @@
             }
 
             .partners-logos {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
                 gap: 2rem;
+            }
+
+            .partner-logo img {
+                height: 40px;
             }
 
             .impact {
@@ -696,14 +704,32 @@
                 flex: 0;
             }
 
+            .impact-main {
+                padding-left: 0;
+                padding-top: 0;
+            }
+
             .impact-header {
                 flex-direction: column;
                 gap: 1rem;
                 margin-bottom: 2.5rem;
             }
 
+            .impact-titles {
+                padding-right: 0;
+                border-right: none;
+                padding-bottom: 1rem;
+                border-bottom: 1px solid rgba(242, 242, 242, 0.15);
+            }
+
             .impact-description {
                 max-width: 100%;
+                padding-top: 0;
+                font-size: 1rem;
+            }
+
+            .impact-stat-number {
+                font-size: clamp(2.2rem, 8vw, 2.8rem);
             }
 
             .impact-stat-row {
@@ -745,23 +771,35 @@
                 padding: 3rem 2rem;
             }
 
+            .impact-heading {
+                font-size: 1.8rem;
+            }
+
+            .impact-description {
+                font-size: 0.95rem;
+            }
+
+            .impact-stat-number {
+                font-size: clamp(1.8rem, 7vw, 2.2rem);
+            }
+
             .impact-photos {
-                min-height: 240px;
+                min-height: 220px;
             }
 
             .impact-photo-circle.circle-lg {
-                width: 190px;
-                height: 190px;
+                width: 170px;
+                height: 170px;
             }
 
             .impact-photo-circle.circle-md {
-                width: 100px;
+                width: 90px;
             }
 
             .impact-photo-circle.circle-sm {
-                width: 75px;
-                left: 80px;
-                bottom: 20px;
+                width: 70px;
+                left: 70px;
+                bottom: 15px;
             }
         }
     </style>
