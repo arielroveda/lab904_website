@@ -1,0 +1,2363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Project Chile — Proposta de Projeto · Lab904</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/components/nav-menu.js"></script>
+  <style>
+    /* ─── Aliases → shared tokens (styles.css) ──────── */
+    :root {
+      --bg:        var(--color-bg);
+      --surface:   var(--color-surface);
+      --surf-el:   var(--color-surface-elevated);
+      --primary:   var(--color-primary);
+      --secondary: var(--color-secondary);
+      --accent:    var(--color-accent);
+      --text:      var(--color-text);
+      --dim:       var(--color-text-dim);
+      --success:   var(--color-success);
+      --border:    rgba(242,149,89,.18);
+
+      /* Phase palette */
+      --c0: #546e7a;   /* Fundação */
+      --c1: #4299e1;   /* Auth */
+      --c2: #38b2ac;   /* Busca */
+      --c3: #48bb78;   /* Carrinho */
+      --c4: #2f9e5e;   /* MVP PF */
+      --c5: #F29559;   /* Fotógrafo painel */
+      --c6: #e07b3c;   /* Upload */
+      --c7: #c96020;   /* Vendas */
+      --c8: #9f7aea;   /* Studios */
+      --c9: #f6ad55;   /* Organiz */
+      --c10:#b794f4;   /* IA */
+      --c11:#63b3ed;   /* i18n */
+      --c12:#fc8181;   /* QA */
+      --c13:#F2D492;   /* Launch */
+    }
+
+    /* Reset, body, bg-gradient e grid-pattern → /styles.css */
+
+    /* ─── Utilities ──────────────────────────────────── */
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .tag {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .35rem 1rem;
+      background: rgba(242,149,89,.12);
+      border: 1px solid rgba(242,149,89,.3);
+      border-radius: 50px;
+      color: var(--primary);
+      font-size: .8rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .badge {
+      display: inline-block;
+      padding: .25rem .7rem;
+      border-radius: 50px;
+      font-size: .72rem; font-weight: 700;
+      letter-spacing: .5px;
+    }
+    .badge-orange { background: rgba(242,149,89,.15); color: var(--primary); border: 1px solid rgba(242,149,89,.3); }
+    .badge-green  { background: rgba(76,175,80,.15);  color: #81c784; border: 1px solid rgba(76,175,80,.3); }
+    .badge-purple { background: rgba(159,122,234,.15);color: #b794f4; border: 1px solid rgba(159,122,234,.3);}
+
+    .material-symbols-outlined {
+      font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+      font-size: inherit; line-height: 1; vertical-align: middle;
+    }
+
+    section { padding: 5rem 0; }
+
+    h2.section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800; margin-bottom: .5rem;
+    }
+    p.section-sub { color: var(--dim); font-size: 1.1rem; }
+
+    /* Header → /styles.css + nav-menu.js */
+
+    /* ─── HERO ───────────────────────────────────────── */
+    .hero {
+      padding: 10rem 0 4rem;
+      position: relative;
+    }
+    .hero-eyebrow { margin-bottom: 1.5rem; }
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 800; line-height: 1.05;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--text) 0%, var(--primary) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-desc {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      color: var(--dim); max-width: 680px;
+      line-height: 1.75; margin-bottom: 3rem;
+    }
+    .hero-stats {
+      display: flex; flex-wrap: wrap; gap: 1.5rem;
+    }
+    .hero-stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.2rem 1.8rem;
+      min-width: 140px;
+      transition: border-color .3s;
+    }
+    .hero-stat:hover { border-color: var(--primary); }
+    .hero-stat-num {
+      font-size: 2.2rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; line-height: 1.1;
+    }
+    .hero-stat-label { color: var(--dim); font-size: .85rem; margin-top: .2rem; }
+
+    /* ─── AUDIENCES ──────────────────────────────────── */
+    .audiences { background: rgba(242,149,89,.03); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .audience-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .audience-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 2rem;
+      transition: all .35s ease;
+      position: relative; overflow: hidden;
+    }
+    .audience-card::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(242,149,89,.05), rgba(242,212,146,.05));
+      opacity: 0; transition: opacity .35s;
+    }
+    .audience-card:hover { transform: translateY(-6px); border-color: var(--primary); box-shadow: 0 16px 48px rgba(242,149,89,.15); }
+    .audience-card:hover::after { opacity: 1; }
+    .audience-icon {
+      width: 52px; height: 52px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; margin-bottom: 1.2rem; position: relative; z-index: 1;
+    }
+    .audience-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: .5rem; position: relative; z-index: 1; }
+    .audience-card p  { color: var(--dim); font-size: .9rem; line-height: 1.6; margin-bottom: 1rem; position: relative; z-index: 1; }
+    .audience-pills { display: flex; flex-wrap: wrap; gap: .4rem; position: relative; z-index: 1; }
+    .audience-pill {
+      font-size: .72rem; font-weight: 600; padding: .2rem .65rem;
+      border-radius: 50px; background: rgba(242,149,89,.1);
+      color: var(--primary); border: 1px solid rgba(242,149,89,.2);
+    }
+
+    /* ─── SCOPE NUMBERS ──────────────────────────────── */
+    .scope-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 16px;
+      overflow: hidden; margin-top: 3rem;
+    }
+    .scope-cell {
+      background: var(--surface);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: background .3s;
+    }
+    .scope-cell:hover { background: var(--surf-el); }
+    .scope-num {
+      font-size: 3rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; line-height: 1;
+    }
+    .scope-label { color: var(--dim); font-size: .85rem; margin-top: .4rem; line-height: 1.4; }
+
+    /* ─── TIMELINE / GANTT ───────────────────────────── */
+    .timeline-section { padding: 5rem 0 4rem; }
+
+    .gantt-wrap {
+      margin-top: 3.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem 2.5rem 3rem;
+      position: relative;
+    }
+
+    /* Legend */
+    .gantt-legend {
+      display: flex; flex-wrap: wrap; gap: .6rem;
+      margin-bottom: 2rem;
+    }
+    .legend-item {
+      display: flex; align-items: center; gap: .4rem;
+      font-size: .78rem; color: var(--dim);
+    }
+    .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+    /* Track container */
+    .gantt-container {
+      position: relative;
+    }
+
+    /* Week ruler */
+    .gantt-ruler {
+      display: flex; position: relative;
+      height: 28px; margin-bottom: .5rem;
+    }
+    .ruler-tick {
+      position: absolute; top: 0;
+      display: flex; flex-direction: column; align-items: center;
+      transform: translateX(-50%);
+    }
+    .ruler-tick-line {
+      width: 1px; height: 10px;
+      background: rgba(242,149,89,.3);
+    }
+    .ruler-tick-label {
+      font-size: .7rem; color: var(--dim);
+      font-family: 'JetBrains Mono', monospace;
+      margin-top: 2px;
+    }
+
+    /* Phase bar track */
+    .gantt-track {
+      position: relative;
+      height: 48px;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+    }
+    .phase-seg {
+      display: flex; align-items: center; justify-content: center;
+      font-size: .72rem; font-weight: 700;
+      color: rgba(0,0,0,.75);
+      cursor: default;
+      transition: filter .2s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 .3rem;
+      position: relative;
+    }
+    .phase-seg:hover { filter: brightness(1.15); }
+    .phase-seg::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(32,44,57,.95);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: .5rem .9rem;
+      border-radius: 8px;
+      font-size: .78rem;
+      font-weight: 500;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .2s;
+      z-index: 10;
+    }
+    .phase-seg:hover::after { opacity: 1; }
+
+    /* Milestone markers */
+    .gantt-milestones {
+      position: relative;
+      height: 80px;
+      margin-top: .5rem;
+    }
+    .ms-marker {
+      position: absolute;
+      display: flex; flex-direction: column; align-items: center;
+      transform: translateX(-50%);
+      cursor: default;
+    }
+    .ms-line {
+      width: 1px; height: 12px;
+      background: var(--primary);
+    }
+    .ms-diamond {
+      width: 10px; height: 10px;
+      background: var(--primary);
+      transform: rotate(45deg);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .ms-info {
+      margin-top: 6px;
+      text-align: center;
+    }
+    .ms-week {
+      display: block;
+      font-size: .68rem; font-weight: 700;
+      color: var(--primary);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .ms-name {
+      display: block;
+      font-size: .7rem; color: var(--dim);
+      line-height: 1.2;
+    }
+
+    /* ─── MILESTONES CARDS ───────────────────────────── */
+    .milestones-section {}
+    .ms-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1rem; margin-top: 3rem;
+    }
+    .ms-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: all .3s;
+      position: relative;
+    }
+    .ms-card.highlight {
+      border-color: rgba(242,149,89,.45);
+      background: linear-gradient(135deg, rgba(242,149,89,.07), rgba(242,212,146,.05));
+    }
+    .ms-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(242,149,89,.12); }
+    .ms-week-chip {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem; font-weight: 700;
+      padding: .2rem .65rem; border-radius: 50px;
+      background: rgba(242,149,89,.15); color: var(--primary);
+      margin-bottom: .8rem;
+    }
+    .ms-card-icon {
+      font-size: 1.8rem;
+      display: block; margin-bottom: .5rem;
+    }
+    .ms-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: .4rem; }
+    .ms-card p  { color: var(--dim); font-size: .82rem; line-height: 1.5; }
+
+    /* ─── PHASES ─────────────────────────────────────── */
+    .phases-section {}
+    .phases-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.2rem; margin-top: 3rem;
+    }
+    .phase-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: all .3s;
+      border-left: 4px solid transparent;
+    }
+    .phase-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(0,0,0,.2); }
+    .phase-card-header {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: .8rem;
+      margin-bottom: 1rem;
+    }
+    .phase-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem; font-weight: 700;
+      padding: .25rem .6rem;
+      border-radius: 6px;
+      color: #000;
+      flex-shrink: 0;
+    }
+    .phase-weeks-badge {
+      font-size: .72rem; color: var(--dim);
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
+    }
+    .phase-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: .5rem; }
+    .phase-card p  { color: var(--dim); font-size: .85rem; line-height: 1.55; margin-bottom: 1rem; }
+    .phase-deliverables { display: flex; flex-wrap: wrap; gap: .35rem; }
+    .deliver-chip {
+      font-size: .7rem; padding: .18rem .6rem;
+      border-radius: 50px;
+      background: var(--surf-el);
+      color: var(--dim);
+      border: 1px solid rgba(242,149,89,.1);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ─── SCREENS FLOW DIAGRAM ───────────────────────── */
+    .flow-section {}
+    .flow-diagram {
+      margin-top: 3rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      overflow-x: auto;
+    }
+    .flow-row {
+      display: flex; align-items: center;
+      gap: .8rem; flex-wrap: nowrap;
+      margin-bottom: 1.2rem;
+    }
+    .flow-row:last-child { margin-bottom: 0; }
+    .flow-label {
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--primary); width: 100px; flex-shrink: 0;
+    }
+    .flow-items { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+    .flow-screen {
+      background: var(--surf-el);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .4rem .9rem;
+      font-size: .78rem; font-weight: 600;
+      white-space: nowrap;
+      transition: all .2s;
+      cursor: default;
+    }
+    .flow-screen:hover { border-color: var(--primary); color: var(--primary); }
+    .flow-screen.milestone-screen {
+      border-color: rgba(242,149,89,.5);
+      background: rgba(242,149,89,.08);
+      color: var(--primary);
+    }
+    .flow-arrow {
+      color: var(--dim); font-size: .8rem; flex-shrink: 0;
+      display: flex; align-items: center;
+    }
+    .flow-modal {
+      background: rgba(159,122,234,.1);
+      border: 1px solid rgba(159,122,234,.3);
+      border-radius: 8px;
+      padding: .4rem .9rem;
+      font-size: .75rem; font-weight: 600;
+      color: #b794f4; white-space: nowrap;
+    }
+    .flow-divider {
+      height: 1px; background: var(--border); margin: 1.2rem 0;
+    }
+
+    /* Footer → /styles.css */
+
+    /* ─── Requirements Tabs ─────────────────────────── */
+    .req-tabs { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+    .req-tab-btn {
+      padding: .45rem 1.2rem;
+      border: 1px solid var(--border); border-radius: 50px;
+      background: transparent; color: var(--dim);
+      cursor: pointer; font-family: 'DM Sans', sans-serif;
+      font-weight: 600; font-size: .88rem; transition: all .2s;
+    }
+    .req-tab-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .req-tab-btn.active { background: var(--primary); color: var(--bg); border-color: var(--primary); }
+    .req-panel { display: none; }
+    .req-panel.active { display: block; }
+    .req-list { display: flex; flex-direction: column; }
+    .req-item {
+      display: grid; grid-template-columns: 78px 1fr 2.2fr;
+      gap: .8rem; padding: .85rem .6rem;
+      border-bottom: 1px solid rgba(242,149,89,.07);
+      align-items: start; transition: background .15s; border-radius: 6px;
+    }
+    .req-item:hover { background: var(--surf-el); }
+    .req-item:last-child { border-bottom: none; }
+    .req-id-tag {
+      font-family: 'JetBrains Mono', monospace; font-size: .68rem; font-weight: 700;
+      padding: .2rem .55rem; border-radius: 6px;
+      background: rgba(242,149,89,.12); color: var(--primary); display: inline-block;
+    }
+    .req-item-name { font-weight: 700; font-size: .9rem; padding-top: .1rem; }
+    .req-item-desc { color: var(--dim); font-size: .82rem; line-height: 1.55; padding-top: .1rem; }
+    @media (max-width: 640px) { .req-item { grid-template-columns: 1fr; gap: .25rem; } }
+
+    /* ─── Screen Accordion ───────────────────────────── */
+    .screen-accordion { display: flex; flex-direction: column; gap: .6rem; margin-top: 2.5rem; }
+    .screen-item-acc {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    }
+    .screen-item-acc.modal-item { border-color: rgba(159,122,234,.28); }
+    .screen-acc-header {
+      display: flex; align-items: center; gap: .8rem; padding: 1rem 1.4rem;
+      cursor: pointer; transition: background .2s; user-select: none;
+    }
+    .screen-acc-header:hover { background: var(--surf-el); }
+    .screen-acc-id {
+      font-family: 'JetBrains Mono', monospace; font-size: .68rem; font-weight: 700;
+      padding: .2rem .55rem; border-radius: 6px;
+      background: rgba(242,149,89,.12); color: var(--primary); flex-shrink: 0;
+    }
+    .screen-item-acc.modal-item .screen-acc-id { background: rgba(159,122,234,.12); color: #b794f4; }
+    .screen-acc-name { font-weight: 700; font-size: .93rem; flex: 1; }
+    .screen-acc-reqs { display: flex; gap: .3rem; flex-wrap: wrap; }
+    .screen-acc-req {
+      font-size: .66rem; padding: .15rem .5rem; border-radius: 50px;
+      background: var(--surf-el); color: var(--dim); font-family: 'JetBrains Mono', monospace;
+    }
+    .screen-acc-chevron {
+      color: var(--dim); transition: transform .3s; flex-shrink: 0;
+      display: flex; align-items: center;
+    }
+    .screen-item-acc.open .screen-acc-chevron { transform: rotate(180deg); }
+    .screen-acc-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height .38s ease, padding .38s ease;
+      padding: 0 1.4rem;
+    }
+    .screen-item-acc.open .screen-acc-body {
+      max-height: 1200px; padding: 1rem 1.4rem 1.4rem;
+      border-top: 1px solid var(--border); background: var(--surf-el);
+    }
+    .screen-acc-desc { color: var(--dim); font-size: .83rem; margin-bottom: .9rem; font-style: italic; }
+    .screen-acc-elements { list-style: none; }
+    .screen-acc-elements li {
+      display: flex; align-items: flex-start; gap: .6rem;
+      padding: .3rem 0; color: var(--text); font-size: .84rem; line-height: 1.5;
+      border-bottom: 1px solid rgba(242,149,89,.05);
+    }
+    .screen-acc-elements li:last-child { border-bottom: none; }
+    .screen-acc-elements li::before { content: '›'; color: var(--primary); font-weight: 700; flex-shrink: 0; }
+    .screen-acc-elements li.modal-sub { padding-left: 1.1rem; }
+    .screen-acc-elements li.modal-sub::before { content: '·'; color: var(--accent); }
+    .screen-group-label {
+      font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--primary); margin: 2rem 0 .8rem;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .screen-group-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* fadeInUp → /styles.css */
+    .fade-in { animation: fadeInUp .6s ease both; }
+    .fade-in-d1 { animation-delay: .1s; }
+    .fade-in-d2 { animation-delay: .2s; }
+    .fade-in-d3 { animation-delay: .3s; }
+    .fade-in-d4 { animation-delay: .4s; }
+
+    /* ─── TERMS & CONDITIONS ────────────────────────── */
+    .terms-parties {
+      display: flex; flex-wrap: wrap; gap: 1.2rem;
+      margin: 2.5rem 0 2rem;
+    }
+    .terms-party {
+      flex: 1; min-width: 240px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.4rem 1.6rem;
+    }
+    .terms-party-label {
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--primary); margin-bottom: .4rem;
+    }
+    .terms-party-name {
+      font-size: 1rem; font-weight: 700; color: var(--text);
+    }
+    .terms-party-detail {
+      font-size: .82rem; color: var(--dim); margin-top: .2rem;
+    }
+    .terms-grid {
+      display: flex; flex-direction: column;
+      gap: 1.2rem; margin-top: 1rem;
+    }
+    .terms-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.8rem 2rem;
+      transition: all .3s;
+      position: relative;
+    }
+    .terms-card:hover {
+      border-color: rgba(242,149,89,.4);
+      box-shadow: 0 8px 32px rgba(242,149,89,.08);
+    }
+    .terms-card-header {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .terms-card-num {
+      width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--bg);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .85rem; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .terms-card h3 {
+      font-size: 1.05rem; font-weight: 700;
+    }
+    .terms-card-body {
+      color: var(--dim); font-size: .88rem; line-height: 1.7;
+    }
+    .terms-card-body p {
+      margin-bottom: .7rem;
+    }
+    .terms-card-body p:last-child { margin-bottom: 0; }
+    .terms-highlight {
+      display: inline-block;
+      padding: .15rem .6rem;
+      border-radius: 6px;
+      background: rgba(242,149,89,.12);
+      color: var(--primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: .82rem;
+    }
+    .terms-arrow {
+      display: inline-block;
+      color: var(--primary);
+      font-weight: 700;
+      margin: 0 .3rem;
+    }
+    .terms-sub-list {
+      list-style: none;
+      margin: .5rem 0 .5rem .5rem;
+      padding: 0;
+    }
+    .terms-sub-list li {
+      display: flex; align-items: flex-start; gap: .5rem;
+      padding: .25rem 0;
+      font-size: .85rem; color: var(--dim); line-height: 1.55;
+    }
+    .terms-sub-list li::before {
+      content: '›'; color: var(--primary); font-weight: 700; flex-shrink: 0;
+    }
+    .terms-sub-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem; font-weight: 700;
+      color: var(--primary); opacity: .7;
+      margin-right: .3rem;
+    }
+
+    /* ─── Password Overlay ──────────────────────────── */
+    .password-overlay {
+      position: fixed; inset: 0; z-index: 10000;
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      transition: opacity .4s ease, visibility .4s ease;
+    }
+    .password-overlay.hidden {
+      opacity: 0; visibility: hidden; pointer-events: none;
+    }
+    .password-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+      max-width: 420px; width: 90%;
+      text-align: center;
+    }
+    .password-icon {
+      width: 64px; height: 64px;
+      margin: 0 auto 1.5rem;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex; align-items: center; justify-content: center;
+    }
+    .password-icon .material-symbols-outlined {
+      font-size: 2rem; color: var(--bg);
+    }
+    .password-box h2 {
+      font-size: 1.5rem; font-weight: 800; margin-bottom: .5rem;
+    }
+    .password-box p {
+      color: var(--dim); font-size: .9rem; margin-bottom: 1.5rem; line-height: 1.6;
+    }
+    .password-box form {
+      display: flex; flex-direction: column; gap: .8rem;
+    }
+    .password-box input[type="password"] {
+      width: 100%; padding: .9rem 1.2rem;
+      background: var(--surf-el);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .password-box input[type="password"]:focus {
+      border-color: var(--primary);
+    }
+    .password-box input[type="password"]::placeholder {
+      color: var(--dim); opacity: .6;
+    }
+    .password-error {
+      color: #fc8181; font-size: .85rem;
+      margin-top: .5rem; display: none;
+    }
+    .password-error.visible { display: block; }
+
+    /* ─── Responsive ─────────────────────────────────── */
+    @media (max-width: 768px) {
+      section { padding: 3.5rem 0; }
+      .hero { padding: 4rem 0 3rem; }
+      .hero h1 { font-size: 2.2rem; }
+      .hero-stats { gap: 1rem; }
+      .hero-stat { min-width: 120px; padding: 1rem; }
+      .hero-stat-num { font-size: 1.8rem; }
+      .ms-cards { grid-template-columns: 1fr 1fr; }
+      .phases-grid { grid-template-columns: 1fr; }
+      .gantt-wrap { padding: 1.5rem 1rem 2rem; }
+      .gantt-milestones { height: 100px; }
+      .ms-name { font-size: .65rem; }
+      .terms-card { padding: 1.4rem 1.2rem; }
+      .terms-parties { flex-direction: column; }
+    }
+    @media (max-width: 480px) {
+      .ms-cards { grid-template-columns: 1fr; }
+      .hero-stats { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-gradient"></div>
+<div class="grid-pattern"></div>
+
+<!-- ─── PASSWORD OVERLAY ─────────────────────────────────── -->
+<div class="password-overlay" id="passwordOverlay">
+  <div class="password-box">
+    <div class="password-icon">
+      <span class="material-symbols-outlined">lock</span>
+    </div>
+    <h2>Acesso Restrito</h2>
+    <p>Esta proposta é confidencial. Insira a senha para visualizar o documento.</p>
+    <form id="passwordForm">
+      <input type="password" id="passwordInput" placeholder="Senha de acesso" autocomplete="off">
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Acessar</button>
+    </form>
+    <div class="password-error" id="passwordError">Senha incorreta. Tente novamente.</div>
+  </div>
+</div>
+
+<nav-menu page="proposal"></nav-menu>
+
+<main id="proposalContent" style="display:none">
+
+<!-- ─── HERO ─────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow fade-in">
+      <span class="tag">
+        <span class="material-symbols-outlined" style="font-size:.9rem">photo_camera</span>
+        Proposta de Projeto
+      </span>
+    </div>
+    <h1 class="fade-in fade-in-d1">Plataforma de<br>Fotos para o<br>Mercado Chileno</h1>
+    <p class="hero-desc fade-in fade-in-d2">
+      Solução web-first, mobile-ready, para publicação, venda e gestão de fotos e fotógrafos — inspirada em Fotto e Fotop, com IA de reconhecimento facial, múltiplos gateways de pagamento e suporte a três idiomas.
+    </p>
+    <div class="hero-stats fade-in fade-in-d3">
+      <div class="hero-stat">
+        <div class="hero-stat-num">27</div>
+        <div class="hero-stat-label">semanas de desenvolvimento</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">540h</div>
+        <div class="hero-stat-label">carga total de trabalho</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4</div>
+        <div class="hero-stat-label">perfis de usuário</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">60+</div>
+        <div class="hero-stat-label">requisitos funcionais</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">21</div>
+        <div class="hero-stat-label">telas e modais (perfil PF)</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">10</div>
+        <div class="hero-stat-label">marcos de entrega</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── AUDIENCES ─────────────────────────────────────────── -->
+<section class="audiences">
+  <div class="wrap">
+    <span class="tag" style="margin-bottom:1rem;display:inline-flex">
+      <span class="material-symbols-outlined" style="font-size:.9rem">group</span>
+      Públicos-alvo
+    </span>
+    <h2 class="section-title">Para quem estamos construindo</h2>
+    <p class="section-sub">Quatro perfis de usuário, cada um com fluxos e dashboards próprios.</p>
+    <div class="audience-grid">
+
+      <div class="audience-card">
+        <div class="audience-icon">
+          <span class="material-symbols-outlined" style="color:#202C39">person_search</span>
+        </div>
+        <h3>Pessoa Fotografada</h3>
+        <p>Encontra, compra e gerencia suas fotos de eventos usando busca inteligente com IA facial.</p>
+        <div class="audience-pills">
+          <span class="audience-pill">20 requisitos</span>
+          <span class="audience-pill">12 telas</span>
+          <span class="audience-pill">9 modais</span>
+          <span class="audience-pill">MVP S10</span>
+        </div>
+      </div>
+
+      <div class="audience-card">
+        <div class="audience-icon">
+          <span class="material-symbols-outlined" style="color:#202C39">camera_alt</span>
+        </div>
+        <h3>Fotógrafo</h3>
+        <p>Cria eventos, faz upload em massa, define preços, processa vendas e analisa desempenho.</p>
+        <div class="audience-pills">
+          <span class="audience-pill">19 requisitos</span>
+          <span class="audience-pill">Fase S11–S17</span>
+          <span class="audience-pill">MVP S17</span>
+        </div>
+      </div>
+
+      <div class="audience-card">
+        <div class="audience-icon">
+          <span class="material-symbols-outlined" style="color:#202C39">corporate_fare</span>
+        </div>
+        <h3>Studio / Agência</h3>
+        <p>Gerencia equipes de fotógrafos, consolida vendas, controla marca corporativa e relatórios.</p>
+        <div class="audience-pills">
+          <span class="audience-pill">9 requisitos</span>
+          <span class="audience-pill">Fase S18–S19</span>
+          <span class="audience-pill">MVP S19</span>
+        </div>
+      </div>
+
+      <div class="audience-card">
+        <div class="audience-icon">
+          <span class="material-symbols-outlined" style="color:#202C39">event</span>
+        </div>
+        <h3>Organizador de Eventos</h3>
+        <p>Cadastra eventos, contrata fotógrafos via marketplace, gerencia galerias e acessa analytics.</p>
+        <div class="audience-pills">
+          <span class="audience-pill">12 requisitos</span>
+          <span class="audience-pill">Fase S20–S21</span>
+          <span class="audience-pill">MVP S21</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── SCOPE ──────────────────────────────────────────────── -->
+<section>
+  <div class="wrap">
+    <span class="tag" style="margin-bottom:1rem;display:inline-flex">
+      <span class="material-symbols-outlined" style="font-size:.9rem">analytics</span>
+      Escopo
+    </span>
+    <h2 class="section-title">Dimensão do projeto</h2>
+    <div class="scope-grid">
+      <div class="scope-cell">
+        <div class="scope-num">60</div>
+        <div class="scope-label">requisitos funcionais</div>
+      </div>
+      <div class="scope-cell">
+        <div class="scope-num">12</div>
+        <div class="scope-label">telas principais<br>(Pessoa Fotografada)</div>
+      </div>
+      <div class="scope-cell">
+        <div class="scope-num">9</div>
+        <div class="scope-label">modais e sub-elementos<br>(Pessoa Fotografada)</div>
+      </div>
+      <div class="scope-cell">
+        <div class="scope-num">13</div>
+        <div class="scope-label">fases de desenvolvimento</div>
+      </div>
+      <div class="scope-cell">
+        <div class="scope-num">20h</div>
+        <div class="scope-label">de trabalho<br>por semana</div>
+      </div>
+      <div class="scope-cell">
+        <div class="scope-num">3</div>
+        <div class="scope-label">idiomas suportados<br>PT · ES · EN</div>
+      </div>
+      <div class="scope-cell">
+        <div class="scope-num">4</div>
+        <div class="scope-label">gateways de pagamento<br>Webpay · Pix · MP · PagSeg</div>
+      </div>
+      <div class="scope-cell">
+        <div class="scope-num">IA</div>
+        <div class="scope-label">reconhecimento facial<br>ativo em S23</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FUNCTIONAL REQUIREMENTS ──────────────────────────────── -->
+<section style="border-top:1px solid var(--border)">
+  <div class="wrap">
+    <span class="tag" style="margin-bottom:1rem;display:inline-flex">
+      <span class="material-symbols-outlined" style="font-size:.9rem">checklist</span>
+      Requisitos Funcionais
+    </span>
+    <h2 class="section-title" style="margin-bottom:.4rem">60 requisitos por perfil</h2>
+    <p class="section-sub" style="margin-bottom:2rem">Selecione o perfil para explorar seus requisitos funcionais.</p>
+
+    <div class="req-tabs">
+      <button class="req-tab-btn active" data-tab="pf">Pessoa Fotografada <span style="opacity:.55;font-weight:400;font-size:.8em">(20)</span></button>
+      <button class="req-tab-btn" data-tab="ft">Fotógrafo <span style="opacity:.55;font-weight:400;font-size:.8em">(19)</span></button>
+      <button class="req-tab-btn" data-tab="st">Studio / Agência <span style="opacity:.55;font-weight:400;font-size:.8em">(9)</span></button>
+      <button class="req-tab-btn" data-tab="oe">Organizador de Eventos <span style="opacity:.55;font-weight:400;font-size:.8em">(12)</span></button>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1rem 1.2rem">
+
+      <!-- ── PF Panel ── -->
+      <div id="req-panel-pf" class="req-panel active">
+        <div class="req-list">
+          <div class="req-item"><span class="req-id-tag">PF-001</span><div class="req-item-name">Criar Perfil</div><div class="req-item-desc">Cadastro via Google/social ou manual com nome completo, e-mail, telefone, foto de perfil, data de nascimento e senha. Processo otimizado para menos de 2 minutos.</div></div>
+          <div class="req-item"><span class="req-id-tag">PF-002</span><div class="req-item-name">Buscar por Eventos</div><div class="req-item-desc">Busca com filtros combinados: localização geográfica (cidade, raio em km), categoria do evento, data, nome e fotógrafo. Resultados exibem prévia, data, local e nº de fotos.</div></div>
+          <div class="req-item"><span class="req-id-tag">PF-003</span><div class="req-item-name">Buscar por Fotos (IA)</div><div class="req-item-desc">Upload de selfie para encontrar fotos do próprio rosto em todos os eventos via reconhecimento facial com machine learning. Filtros contextuais por categoria (número de peito, personagem, etc.).</div></div>
+          <div class="req-item"><span class="req-id-tag">PF-004</span><div class="req-item-name">Buscar por Fotógrafos</div><div class="req-item-desc">Busca por nome, especialidade, região, avaliação/rating e faixa de preço. Exibe portfólio, contato, eventos cobertos e avaliações de clientes.</div></div>
+          <div class="req-item"><span class="req-id-tag">PF-005</span><div class="req-item-name">Verificar Perfil</div><div class="req-item-desc">Verificação de identidade opcional com documento oficial (RUT no Chile, RG no Brasil). Perfis verificados recebem selo distintivo e têm prioridade em buscas.</div></div>
+          <div class="req-item"><span class="req-id-tag">PF-006</span><div class="req-item-name">Editar Perfil</div><div class="req-item-desc">Atualização de dados pessoais, foto de perfil, preferências de notificação, informações de pagamento, endereço de entrega (produtos físicos) e redes sociais vinculadas.</div></div>
+          <div class="req-item"><span class="req-id-tag">PF-007</span><div class="req-item-name">Excluir Perfil</div><div class="req-item-desc">Exclusão permanente com confirmação em duas etapas. Dados anonimizados conforme LGPD/regulamentações chilenas. Histórico de compras mantido por obrigações fiscais.</div></div>
+          <div class="req-item"><span class="req-id-tag">PF-008</span><div class="req-item-name">Carrinho de Compras</div><div class="req-item-desc">Carrinho persistente com múltiplos itens de diferentes eventos e fotógrafos. Opções de produto: download digital (várias resoluções), impressão física (tamanhos variados) e pacotes/combos.</div></div>
+          <div class="req-item"><span class="req-id-tag">PF-009</span><div class="req-item-name">Histórico de Compras</div><div class="req-item-desc">Lista de todas as compras com data, evento, fotógrafo, valor, status e link para download ou re-download. Filtros por período, evento, fotógrafo e status.</div></div>
+          <div class="req-item"><span class="req-id-tag">PF-010</span><div class="req-item-name">Histórico de Eventos Participados</div><div class="req-item-desc">Timeline visual dos eventos em que o usuário foi fotografado ou marcou presença: foto de capa, data, local e número de fotos disponíveis. Permite marcar eventos favoritos.</div></div>
+          <div class="req-item"><span class="req-id-tag">PF-011</span><div class="req-item-name">Dashboard Pessoal</div><div class="req-item-desc">Painel intuitivo com timeline de eventos, recomendações baseadas em histórico, notificações de novas fotos identificadas, fotos adquiridas, cupons disponíveis e fotógrafos favoritos.</div></div>
+          <div class="req-item"><span class="req-id-tag">PF-012</span><div class="req-item-name">Privacidade do Perfil</div><div class="req-item-desc">Controles granulares: perfil público/privado, permitir/bloquear identificação facial, ocultar histórico de eventos, permitir contato de fotógrafos, visibilidade de fotos compradas.</div></div>
+          <div class="req-item"><span class="req-id-tag">PF-013</span><div class="req-item-name">Inserir Cupom de Desconto</div><div class="req-item-desc">Campo inline no carrinho com validação em tempo real. Suporta: percentual, valor fixo, frete grátis e combo de fotos. Exibe termos e condições.</div></div>
+          <div class="req-item"><span class="req-id-tag">PF-014</span><div class="req-item-name">Alterar Idioma</div><div class="req-item-desc">Seletor disponível em todas as páginas: Português (BR), Español (CL) e English. Tradução abrange interface, e-mails e notificações. Detecta idioma do browser como padrão.</div></div>
+          <div class="req-item"><span class="req-id-tag">PF-015</span><div class="req-item-name">Favoritar Fotos</div><div class="req-item-desc">Wishlist de fotos com notificação ao usuário quando itens favoritados entram em promoção. Acessível antes da compra.</div></div>
+          <div class="req-item"><span class="req-id-tag">PF-016</span><div class="req-item-name">Avaliar Fotógrafos</div><div class="req-item-desc">Avaliação 1–5 estrelas com comentário após compra confirmada. Sub-critérios opcionais: qualidade das fotos, atendimento e experiência geral.</div></div>
+          <div class="req-item"><span class="req-id-tag">PF-017</span><div class="req-item-name">Receber Notificações</div><div class="req-item-desc">Sistema multicanal via e-mail, WhatsApp ou SMS: novas fotos identificadas, eventos na região, promoções, mensagens de fotógrafos e lembretes de carrinho abandonado.</div></div>
+          <div class="req-item"><span class="req-id-tag">PF-018</span><div class="req-item-name">Compartilhar/Baixar Fotos</div><div class="req-item-desc">Compartilhamento pós-compra em redes sociais com ou sem marca d'água. Também sendo possível realizar download.</div></div>
+          <div class="req-item"><span class="req-id-tag">PF-019</span><div class="req-item-name">Solicitar Remoção de Foto</div><div class="req-item-desc">Solicitação de remoção por direito de imagem. Análise pela plataforma e remoção permanente se aprovada.</div></div>
+          <div class="req-item"><span class="req-id-tag">PF-020</span><div class="req-item-name">Habilitar Conta de Fotógrafo</div><div class="req-item-desc">Usuário fotografado pode obter privilégios de fotógrafo habilitando a opção no perfil e cadastrando portfólio mínimo de 10 fotos (conforme FT-001).</div></div>
+        </div>
+      </div>
+
+      <!-- ── FT Panel ── -->
+      <div id="req-panel-ft" class="req-panel">
+        <div class="req-list">
+          <div class="req-item"><span class="req-id-tag">FT-001</span><div class="req-item-name">Criar Perfil</div><div class="req-item-desc">Cadastro com dados profissionais obrigatórios: RUT/CPF/CNPJ, nome artístico, especialidades, regiões de atuação, portfólio inicial mínimo de 10 fotos, bio e anos de experiência. Verificação profissional obrigatória.</div></div>
+          <div class="req-item"><span class="req-id-tag">FT-002</span><div class="req-item-name">Criar e Gerenciar Eventos</div><div class="req-item-desc">Criação de eventos com: nome, categoria, data/hora, local com mapa, descrição, visibilidade (público/privado), código de acesso, número estimado de participantes e valor padrão de venda.</div></div>
+          <div class="req-item"><span class="req-id-tag">FT-003</span><div class="req-item-name">Upload de Fotos</div><div class="req-item-desc">Upload em massa de até 1000 materiais simultâneos (fotos e vídeos). Processamento em background, organização automática por EXIF, edição básica integrada, definição de preço e tags em lote.</div></div>
+          <div class="req-item"><span class="req-id-tag">FT-004</span><div class="req-item-name">Organizar Galeria</div><div class="req-item-desc">Álbuns/pastas, tags personalizadas, filtros por data/evento/categoria, busca por metadados, reordenação drag-and-drop, seleção múltipla para ações em lote e destaques de capa.</div></div>
+          <div class="req-item"><span class="req-id-tag">FT-005</span><div class="req-item-name">Definir Precificação</div><div class="req-item-desc">Preço padrão, preços diferenciados por tipo de evento, pacotes promocionais (5, 10 fotos, evento completo), licenças comerciais com preço premium, promoções por tempo limitado e cupons.</div></div>
+          <div class="req-item"><span class="req-id-tag">FT-006</span><div class="req-item-name">Editar Perfil Profissional</div><div class="req-item-desc">Atualização de informações pessoais/comerciais, portfólio, especialidades, regiões, preços padrão, horários, redes sociais, depoimentos de clientes e prêmios/certificações.</div></div>
+          <div class="req-item"><span class="req-id-tag">FT-007</span><div class="req-item-name">Dashboard de Fotógrafo</div><div class="req-item-desc">Resumo de vendas (hoje/semana/mês/ano), eventos ativos, fotos mais vendidas, receita total, novos pedidos, taxa de conversão, gráficos de desempenho e ranking na plataforma e por evento.</div></div>
+          <div class="req-item"><span class="req-id-tag">FT-008</span><div class="req-item-name">Processar Vendas e Pedidos</div><div class="req-item-desc">Central de pedidos: status (pendente, pago, entregue), dados do comprador, fotos vendidas, valor recebido, taxa da plataforma, previsão de repasse, nota fiscal e comunicação com cliente.</div></div>
+          <div class="req-item"><span class="req-id-tag">FT-009</span><div class="req-item-name">Receber Pagamentos</div><div class="req-item-desc">Integração com Webpay, Mercado Pago, Pix e PagSeguro. Repasse automático semanal ou mensal (escolha do fotógrafo) com extrato detalhado e comprovantes fiscais.</div></div>
+          <div class="req-item"><span class="req-id-tag">FT-010</span><div class="req-item-name">Gerenciar Participação em Eventos</div><div class="req-item-desc">Aceitar/recusar convites de organizadores, calendário de disponibilidade, visualizar outros fotógrafos no mesmo evento e atualizar status (confirmado, cancelado, concluído).</div></div>
+          <div class="req-item"><span class="req-id-tag">FT-011</span><div class="req-item-name">Aplicar Marca D'água</div><div class="req-item-desc">Ferramenta automática com personalização de logo/texto, posicionamento configurável, transparência ajustável e aplicação em lote antes da publicação. Preview protegido; entrega sem marca d'água após compra.</div></div>
+          <div class="req-item"><span class="req-id-tag">FT-012</span><div class="req-item-name">Configurar Reconhecimento Facial</div><div class="req-item-desc">Opt-in por evento ou globalmente para ativar IA de reconhecimento facial: facilita identificação automática, notifica pessoas fotografadas e aumenta a descoberta das fotos.</div></div>
+          <div class="req-item"><span class="req-id-tag">FT-013</span><div class="req-item-name">Gerenciar Portfólio Público</div><div class="req-item-desc">Galeria pública no perfil: seleção de melhores trabalhos, organização por categoria e descrição individual. Permite que clientes avaliem qualidade antes de contratar.</div></div>
+          <div class="req-item"><span class="req-id-tag">FT-014</span><div class="req-item-name">Comunicar com Clientes</div><div class="req-item-desc">Chat direto com compradores: notificações de novas mensagens, histórico de conversas, compartilhamento de arquivos e templates de respostas rápidas.</div></div>
+          <div class="req-item"><span class="req-id-tag">FT-015</span><div class="req-item-name">Analisar Desempenho</div><div class="req-item-desc">Relatórios detalhados: fotos mais visualizadas, eventos com melhor conversão, período de maior venda, análise demográfica de compradores, comparativo com período anterior e sugestões de IA.</div></div>
+          <div class="req-item"><span class="req-id-tag">FT-016</span><div class="req-item-name">Criar Promoções e Cupons</div><div class="req-item-desc">Gerador de cupons: código personalizado, tipo de desconto (% ou valor fixo), limite de usos, validade, eventos/fotos aplicáveis e rastreamento de uso.</div></div>
+          <div class="req-item"><span class="req-id-tag">FT-017</span><div class="req-item-name">Responder Avaliações</div><div class="req-item-desc">Resposta pública a comentários e avaliações de clientes para demonstrar profissionalismo, melhorar reputação e resolver problemas publicamente.</div></div>
+          <div class="req-item"><span class="req-id-tag">FT-018</span><div class="req-item-name">Excluir Perfil</div><div class="req-item-desc">Exclusão de conta profissional com confirmação em duas etapas, aviso sobre vendas pendentes, período de retenção fiscal e exportação de dados antes da exclusão.</div></div>
+          <div class="req-item"><span class="req-id-tag">FT-019</span><div class="req-item-name">Abandono de Carrinho</div><div class="req-item-desc">Painel com lista de usuários que possuem fotos do fotógrafo no carrinho. Permite contato direto para oferecer desconto ou ação específica para converter a venda.</div></div>
+        </div>
+      </div>
+
+      <!-- ── ST Panel ── -->
+      <div id="req-panel-st" class="req-panel">
+        <div class="req-list">
+          <div class="req-item"><span class="req-id-tag">ST-001</span><div class="req-item-name">Criar Perfil Empresarial</div><div class="req-item-desc">Cadastro corporativo com razão social, nome fantasia, CNPJ/RUT, endereço, equipe de fotógrafos, portfólio institucional, anos de mercado e certificações/prêmios.</div></div>
+          <div class="req-item"><span class="req-id-tag">ST-002</span><div class="req-item-name">Gerenciar Equipe de Fotógrafos</div><div class="req-item-desc">Adicionar/remover fotógrafos, definir permissões granulares (upload, precificação, comunicação), atribuir eventos, visualizar desempenho individual e definir metas de vendas.</div></div>
+          <div class="req-item"><span class="req-id-tag">ST-003</span><div class="req-item-name">Consolidar Vendas da Equipe</div><div class="req-item-desc">Dashboard consolidado: vendas totais e por fotógrafo, receita total, comissões a pagar, relatórios financeiros, exportação para contabilidade e gráficos comparativos de desempenho.</div></div>
+          <div class="req-item"><span class="req-id-tag">ST-004</span><div class="req-item-name">Definir Políticas de Precificação</div><div class="req-item-desc">Tabela de preços padrão para todo o studio, controle sobre permissão de alterações por fotógrafo, definição de margens mínimas, aprovação de promoções e pacotes corporativos.</div></div>
+          <div class="req-item"><span class="req-id-tag">ST-005</span><div class="req-item-name">Gerenciar Múltiplos Eventos</div><div class="req-item-desc">Visão geral de todos os eventos: calendário visual, filtros por fotógrafo/status/data, atribuição de equipe, controle de entregas e follow-up com organizadores.</div></div>
+          <div class="req-item"><span class="req-id-tag">ST-006</span><div class="req-item-name">Configurar Pagamentos Centralizados</div><div class="req-item-desc">Conta bancária corporativa para recebimento centralizado, repasse automático para fotógrafos conforme acordo, controle de comissões e integração com sistemas contábeis.</div></div>
+          <div class="req-item"><span class="req-id-tag">ST-007</span><div class="req-item-name">Criar Relatórios Gerenciais</div><div class="req-item-desc">Relatórios executivos: desempenho mensal/trimestral/anual, ROI por tipo de evento, análise de mercado, previsões baseadas em histórico e benchmarking com dados anonimizados.</div></div>
+          <div class="req-item"><span class="req-id-tag">ST-008</span><div class="req-item-name">Gerenciar Marca Corporativa</div><div class="req-item-desc">Marca d'água corporativa obrigatória em todas as fotos da equipe, templates de portfólio e materiais promocionais com identidade visual padronizada.</div></div>
+          <div class="req-item"><span class="req-id-tag">ST-009</span><div class="req-item-name">Atribuir Permissões e Acessos</div><div class="req-item-desc">RBAC com 5 funções: administrador (acesso total), gerente (sem financeiro sensível), fotógrafo (seus eventos), editor (upload/edição) e financeiro (relatórios e pagamentos). Combinação de funções permitida.</div></div>
+        </div>
+      </div>
+
+      <!-- ── OE Panel ── -->
+      <div id="req-panel-oe" class="req-panel">
+        <div class="req-list">
+          <div class="req-item"><span class="req-id-tag">OE-001</span><div class="req-item-name">Criar Perfil de Organizador</div><div class="req-item-desc">Cadastro com nome/empresa, tipo de eventos organizados, região de atuação, contato profissional, site/redes sociais, eventos anteriores realizados e porte médio dos eventos.</div></div>
+          <div class="req-item"><span class="req-id-tag">OE-002</span><div class="req-item-name">Cadastrar Novo Evento</div><div class="req-item-desc">Formulário completo: nome, categoria, data/hora, local com mapa, descrição, público esperado, visibilidade (aberto/privado), patrocinadores e link para inscrições externas.</div></div>
+          <div class="req-item"><span class="req-id-tag">OE-003</span><div class="req-item-name">Buscar e Contratar Fotógrafos</div><div class="req-item-desc">Marketplace com filtros por especialidade, região, disponibilidade, avaliação e preço. Envio de propostas, comparação de orçamentos, chat para negociação e contratação direta pela plataforma.</div></div>
+          <div class="req-item"><span class="req-id-tag">OE-004</span><div class="req-item-name">Gerenciar Fotógrafos do Evento</div><div class="req-item-desc">Lista com status (confirmado, pendente, cancelado), coberturas atribuídas por horário/área, comunicação centralizada e avaliação do trabalho pós-evento.</div></div>
+          <div class="req-item"><span class="req-id-tag">OE-005</span><div class="req-item-name">Criar Códigos de Acesso</div><div class="req-item-desc">Geração de códigos para eventos privados/corporativos: permite acesso exclusivo a participantes autorizados, controle de distribuição, rastreamento de uso e revogação de códigos.</div></div>
+          <div class="req-item"><span class="req-id-tag">OE-006</span><div class="req-item-name">Visualizar Fotos do Evento</div><div class="req-item-desc">Acesso antecipado à galeria: aprovação/remoção de fotos inadequadas, seleção de destaques e curadoria da galeria pública antes da liberação para participantes.</div></div>
+          <div class="req-item"><span class="req-id-tag">OE-007</span><div class="req-item-name">Dashboard de Evento</div><div class="req-item-desc">Estatísticas de participação, total de fotos publicadas, vendas realizadas (parceria comercial), engajamento dos participantes, feedback recebido e compartilhamentos sociais.</div></div>
+          <div class="req-item"><span class="req-id-tag">OE-008</span><div class="req-item-name">Criar Parcerias Comerciais</div><div class="req-item-desc">Acordos com fotógrafos: comissão sobre vendas, patrocínio de cobertura (fotógrafo paga para divulgar marca), distribuição gratuita (organizador compra pacote) e definição de termos contratuais.</div></div>
+          <div class="req-item"><span class="req-id-tag">OE-009</span><div class="req-item-name">Promover Evento na Plataforma</div><div class="req-item-desc">Banner destacado, push notifications para usuários da região, e-mail marketing para base de fotógrafos e participantes, boost em buscas e integração com redes sociais.</div></div>
+          <div class="req-item"><span class="req-id-tag">OE-010</span><div class="req-item-name">Exportar Relatórios do Evento</div><div class="req-item-desc">Relatórios pós-evento: participantes fotografados, fotos mais populares, receita gerada, dados demográficos, comparativo com eventos anteriores e feedback dos fotógrafos.</div></div>
+          <div class="req-item"><span class="req-id-tag">OE-011</span><div class="req-item-name">Gerenciar Múltiplos Eventos</div><div class="req-item-desc">Calendário de eventos, ativos/passados/futuros, templates para eventos recorrentes, clonagem de eventos e análise consolidada de desempenho.</div></div>
+          <div class="req-item"><span class="req-id-tag">OE-012</span><div class="req-item-name">Avaliar Fotógrafos</div><div class="req-item-desc">Avaliação pós-evento de fotógrafos contratados: qualidade do trabalho, pontualidade, profissionalismo e comunicação. Contribui para o ranking da plataforma.</div></div>
+        </div>
+      </div>
+
+    </div><!-- /panel container -->
+  </div>
+</section>
+
+<!-- ─── TIMELINE / GANTT ───────────────────────────────────── -->
+<section class="timeline-section">
+  <div class="wrap">
+    <span class="tag" style="margin-bottom:1rem;display:inline-flex">
+      <span class="material-symbols-outlined" style="font-size:.9rem">schedule</span>
+      Cronograma
+    </span>
+    <h2 class="section-title">27 semanas · 13 fases</h2>
+    <p class="section-sub">Passe o cursor sobre cada bloco para ver o detalhe. Os marcos ◆ indicam entregas principais.</p>
+
+    <div class="gantt-wrap">
+
+      <!-- Legend -->
+      <div class="gantt-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--c0)"></div>Fundação</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--c1)"></div>Autenticação</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--c2)"></div>Busca & Eventos</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--c3)"></div>Carrinho & Checkout</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--c4)"></div>MVP — Pessoa Fotografada</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--c5)"></div>Fotógrafo Painel</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--c6)"></div>Upload & Galeria</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--c7)"></div>Vendas & Pag.</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--c8)"></div>Studios</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--c9)"></div>Organizadores</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--c10)"></div>IA</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--c11)"></div>i18n</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--c12)"></div>QA & Segurança</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--c13)"></div>Launch</div>
+      </div>
+
+      <div class="gantt-container">
+        <!-- Week ruler: marks at S1,S5,S10,S14,S18,S22,S26,S27 -->
+        <div class="gantt-ruler">
+          <!-- Ticks at notable weeks -->
+          <div class="ruler-tick" style="left:0%">
+            <div class="ruler-tick-line"></div><div class="ruler-tick-label">S1</div>
+          </div>
+          <div class="ruler-tick" style="left:14.81%">
+            <div class="ruler-tick-line"></div><div class="ruler-tick-label">S5</div>
+          </div>
+          <div class="ruler-tick" style="left:33.33%">
+            <div class="ruler-tick-line"></div><div class="ruler-tick-label">S10</div>
+          </div>
+          <div class="ruler-tick" style="left:48.15%">
+            <div class="ruler-tick-line"></div><div class="ruler-tick-label">S14</div>
+          </div>
+          <div class="ruler-tick" style="left:62.96%">
+            <div class="ruler-tick-line"></div><div class="ruler-tick-label">S18</div>
+          </div>
+          <div class="ruler-tick" style="left:77.78%">
+            <div class="ruler-tick-line"></div><div class="ruler-tick-label">S22</div>
+          </div>
+          <div class="ruler-tick" style="left:92.59%">
+            <div class="ruler-tick-line"></div><div class="ruler-tick-label">S26</div>
+          </div>
+          <div class="ruler-tick" style="left:100%">
+            <div class="ruler-tick-line"></div><div class="ruler-tick-label">S27</div>
+          </div>
+        </div>
+
+        <!-- Phase bar track (27 weeks total) -->
+        <div class="gantt-track">
+          <!-- F0: S1-S2 → 2/27 = 7.41% -->
+          <div class="phase-seg" style="width:7.41%;background:var(--c0)" data-tooltip="F0 — Fundação: S1–S2 · 40h">F0</div>
+          <!-- F1: S3-S4 → 7.41% -->
+          <div class="phase-seg" style="width:7.41%;background:var(--c1)" data-tooltip="F1 — Autenticação: S3–S4 · 40h">F1</div>
+          <!-- F2: S5-S6 → 7.41% -->
+          <div class="phase-seg" style="width:7.41%;background:var(--c2)" data-tooltip="F2 — Busca & Eventos: S5–S6 · 40h">F2</div>
+          <!-- F3: S7-S8 → 7.41% -->
+          <div class="phase-seg" style="width:7.41%;background:var(--c3)" data-tooltip="F3 — Carrinho & Checkout: S7–S8 · 40h">F3</div>
+          <!-- F4: S9-S10 → 7.41% -->
+          <div class="phase-seg" style="width:7.41%;background:var(--c4)" data-tooltip="F4 — Perfil & Biblioteca PF: S9–S10 · 40h ◆ MVP PF">F4</div>
+          <!-- F5: S11-S13 → 3/27 = 11.11% -->
+          <div class="phase-seg" style="width:11.11%;background:var(--c5)" data-tooltip="F5 — Painel do Fotógrafo: S11–S13 · 60h">Fotógrafo</div>
+          <!-- F6: S14-S15 → 7.41% -->
+          <div class="phase-seg" style="width:7.41%;background:var(--c6)" data-tooltip="F6 — Upload & Galeria: S14–S15 · 40h">F6</div>
+          <!-- F7: S16-S17 → 7.41% -->
+          <div class="phase-seg" style="width:7.41%;background:var(--c7)" data-tooltip="F7 — Vendas & Pagamentos: S16–S17 · 40h ◆ MVP FT">F7</div>
+          <!-- F8: S18-S19 → 7.41% -->
+          <div class="phase-seg" style="width:7.41%;background:var(--c8)" data-tooltip="F8 — Studios & Agências: S18–S19 · 40h ◆ MVP ST">Studios</div>
+          <!-- F9: S20-S21 → 7.41% -->
+          <div class="phase-seg" style="width:7.41%;background:var(--c9)" data-tooltip="F9 — Organizadores: S20–S21 · 40h ◆ MVP Completo">Organ.</div>
+          <!-- F10: S22-S23 → 7.41% -->
+          <div class="phase-seg" style="width:7.41%;background:var(--c10)" data-tooltip="F10 — IA Facial: S22–S23 · 40h ◆ IA Integrada">IA</div>
+          <!-- F11: S24 → 1/27 = 3.70% -->
+          <div class="phase-seg" style="width:3.70%;background:var(--c11)" data-tooltip="F11 — i18n & Notificações: S24 · 20h">i18</div>
+          <!-- F12: S25-S26 → 7.41% -->
+          <div class="phase-seg" style="width:7.41%;background:var(--c12)" data-tooltip="F12 — QA & Segurança: S25–S26 · 40h ◆ Beta">QA</div>
+          <!-- F13: S27 → 3.70% -->
+          <div class="phase-seg" style="width:3.70%;background:var(--c13)" data-tooltip="F13 — Launch: S27 · 20h ◆ v1.0">🚀</div>
+        </div>
+
+        <!-- Milestones below track -->
+        <div class="gantt-milestones">
+          <!-- S2 = 7.41% -->
+          <div class="ms-marker" style="left:7.41%">
+            <div class="ms-line"></div>
+            <div class="ms-diamond"></div>
+            <div class="ms-info">
+              <span class="ms-week">S2</span>
+              <span class="ms-name">Kickoff &<br>Arquitetura</span>
+            </div>
+          </div>
+          <!-- S6 = 22.22% -->
+          <div class="ms-marker" style="left:22.22%">
+            <div class="ms-line"></div>
+            <div class="ms-diamond"></div>
+            <div class="ms-info">
+              <span class="ms-week">S6</span>
+              <span class="ms-name">Protótipo<br>Navegável</span>
+            </div>
+          </div>
+          <!-- S8 = 29.63% -->
+          <div class="ms-marker" style="left:29.63%">
+            <div class="ms-line"></div>
+            <div class="ms-diamond"></div>
+            <div class="ms-info">
+              <span class="ms-week">S8</span>
+              <span class="ms-name">Compra<br>Funcional</span>
+            </div>
+          </div>
+          <!-- S10 = 37.04% -->
+          <div class="ms-marker" style="left:37.04%">
+            <div class="ms-line"></div>
+            <div class="ms-diamond"></div>
+            <div class="ms-info">
+              <span class="ms-week">S10</span>
+              <span class="ms-name">MVP — Pessoa<br>Fotografada</span>
+            </div>
+          </div>
+          <!-- S17 = 62.96% -->
+          <div class="ms-marker" style="left:62.96%">
+            <div class="ms-line"></div>
+            <div class="ms-diamond"></div>
+            <div class="ms-info">
+              <span class="ms-week">S17</span>
+              <span class="ms-name">MVP<br>Fotógrafo</span>
+            </div>
+          </div>
+          <!-- S21 = 77.78% -->
+          <div class="ms-marker" style="left:77.78%">
+            <div class="ms-line"></div>
+            <div class="ms-diamond"></div>
+            <div class="ms-info">
+              <span class="ms-week">S21</span>
+              <span class="ms-name">MVP<br>Completo</span>
+            </div>
+          </div>
+          <!-- S23 = 85.19% -->
+          <div class="ms-marker" style="left:85.19%">
+            <div class="ms-line"></div>
+            <div class="ms-diamond"></div>
+            <div class="ms-info">
+              <span class="ms-week">S23</span>
+              <span class="ms-name">IA<br>Integrada</span>
+            </div>
+          </div>
+          <!-- S26 = 96.30% -->
+          <div class="ms-marker" style="left:96.3%">
+            <div class="ms-line"></div>
+            <div class="ms-diamond"></div>
+            <div class="ms-info">
+              <span class="ms-week">S26</span>
+              <span class="ms-name">Beta<br>Release</span>
+            </div>
+          </div>
+          <!-- S27 = 100% -->
+          <div class="ms-marker" style="left:100%">
+            <div class="ms-line"></div>
+            <div class="ms-diamond" style="background:var(--secondary)"></div>
+            <div class="ms-info">
+              <span class="ms-week" style="color:var(--secondary)">S27</span>
+              <span class="ms-name">Launch<br>v1.0</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /gantt-container -->
+    </div><!-- /gantt-wrap -->
+  </div>
+</section>
+
+<!-- ─── MILESTONE CARDS ───────────────────────────────────── -->
+<section class="milestones-section">
+  <div class="wrap">
+    <span class="tag" style="margin-bottom:1rem;display:inline-flex">
+      <span class="material-symbols-outlined" style="font-size:.9rem">flag</span>
+      Marcos
+    </span>
+    <h2 class="section-title">10 entregas principais</h2>
+    <div class="ms-cards">
+
+      <div class="ms-card">
+        <div class="ms-week-chip">S2</div>
+        <span class="ms-card-icon">🏗️</span>
+        <h3>Kickoff e Arquitetura</h3>
+        <p>Ambiente configurado, stack definida, banco modelado, design system e CI/CD prontos.</p>
+      </div>
+
+      <div class="ms-card highlight">
+        <div class="ms-week-chip">S6</div>
+        <span class="ms-card-icon">🖼️</span>
+        <h3>Protótipo Navegável</h3>
+        <p>Fluxo completo: busca → evento → fotógrafo → foto, sem compra. Pronto para validação.</p>
+      </div>
+
+      <div class="ms-card">
+        <div class="ms-week-chip">S8</div>
+        <span class="ms-card-icon">🛒</span>
+        <h3>Compra Funcional</h3>
+        <p>Primeiro ciclo de venda: carrinho, checkout e gateway de pagamento integrados.</p>
+      </div>
+
+      <div class="ms-card highlight">
+        <div class="ms-week-chip">S10</div>
+        <span class="ms-card-icon">✅</span>
+        <h3>MVP — Pessoa Fotografada</h3>
+        <p>Todos os 20 requisitos PF operacionais: 12 telas + 9 modais cobertos em produção.</p>
+      </div>
+
+      <div class="ms-card">
+        <div class="ms-week-chip">S17</div>
+        <span class="ms-card-icon">📸</span>
+        <h3>MVP — Fotógrafo</h3>
+        <p>Ciclo completo: cadastro → evento → upload → venda → recebimento → análise.</p>
+      </div>
+
+      <div class="ms-card">
+        <div class="ms-week-chip">S19</div>
+        <span class="ms-card-icon">🏢</span>
+        <h3>MVP — Studios</h3>
+        <p>Gestão de equipe, consolidação de vendas, marca corporativa e relatórios gerenciais.</p>
+      </div>
+
+      <div class="ms-card highlight">
+        <div class="ms-week-chip">S21</div>
+        <span class="ms-card-icon">🎯</span>
+        <h3>MVP Completo</h3>
+        <p>Todos os quatro perfis funcionais. Plataforma viável para early adopters.</p>
+      </div>
+
+      <div class="ms-card">
+        <div class="ms-week-chip">S23</div>
+        <span class="ms-card-icon">🤖</span>
+        <h3>IA Integrada</h3>
+        <p>Reconhecimento facial ativo: busca por rosto com stepper de 3 etapas e nível de confiança.</p>
+      </div>
+
+      <div class="ms-card">
+        <div class="ms-week-chip">S26</div>
+        <span class="ms-card-icon">🔬</span>
+        <h3>Beta Release</h3>
+        <p>QA concluído, audit de segurança, OWASP, LGPD/Chile, 10k usuários simultâneos validados.</p>
+      </div>
+
+      <div class="ms-card highlight">
+        <div class="ms-week-chip">S27</div>
+        <span class="ms-card-icon">🚀</span>
+        <h3>Launch v1.0</h3>
+        <p>Deploy com zero downtime, monitoramento ativo, documentação final e comunicado público.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── PHASES DETAIL ─────────────────────────────────────── -->
+<section class="phases-section" style="background:rgba(242,149,89,.02);border-top:1px solid var(--border)">
+  <div class="wrap">
+    <span class="tag" style="margin-bottom:1rem;display:inline-flex">
+      <span class="material-symbols-outlined" style="font-size:.9rem">layers</span>
+      Fases
+    </span>
+    <h2 class="section-title">13 fases de desenvolvimento</h2>
+    <p class="section-sub">Cada fase entrega valor incremental, com telas e requisitos rastreados.</p>
+    <div class="phases-grid">
+
+      <div class="phase-card" style="border-left-color:var(--c0)">
+        <div class="phase-card-header">
+          <span class="phase-num" style="background:var(--c0)">F0</span>
+          <span class="phase-weeks-badge">S1–S2 · 40h</span>
+        </div>
+        <h3>Fundação</h3>
+        <p>Setup de repo, stack, ORM, design system base, modelagem do banco, CI/CD e ambientes.</p>
+        <div class="phase-deliverables">
+          <span class="deliver-chip">repo + CI/CD</span>
+          <span class="deliver-chip">design tokens</span>
+          <span class="deliver-chip">DB schema</span>
+          <span class="deliver-chip">ambientes</span>
+        </div>
+      </div>
+
+      <div class="phase-card" style="border-left-color:var(--c1)">
+        <div class="phase-card-header">
+          <span class="phase-num" style="background:var(--c1)">F1</span>
+          <span class="phase-weeks-badge">S3–S4 · 40h</span>
+        </div>
+        <h3>Autenticação</h3>
+        <p>Onboarding, login/cadastro com Google OAuth + manual, JWT, navegação base e bottom sheet "Completar Perfil".</p>
+        <div class="phase-deliverables">
+          <span class="deliver-chip">T-PF-01</span>
+          <span class="deliver-chip">T-PF-02</span>
+          <span class="deliver-chip">M-PF-01</span>
+          <span class="deliver-chip">PF-001</span>
+        </div>
+      </div>
+
+      <div class="phase-card" style="border-left-color:var(--c2)">
+        <div class="phase-card-header">
+          <span class="phase-num" style="background:var(--c2)">F2</span>
+          <span class="phase-weeks-badge">S5–S6 · 40h</span>
+        </div>
+        <h3>Busca e Eventos</h3>
+        <p>Tela de Busca (abas Eventos + Fotógrafos), filtros, Detalhe do Evento e Perfil do Fotógrafo.</p>
+        <div class="phase-deliverables">
+          <span class="deliver-chip">T-PF-04</span>
+          <span class="deliver-chip">T-PF-05</span>
+          <span class="deliver-chip">T-PF-06</span>
+          <span class="deliver-chip">PF-002 · PF-004</span>
+        </div>
+      </div>
+
+      <div class="phase-card" style="border-left-color:var(--c3)">
+        <div class="phase-card-header">
+          <span class="phase-num" style="background:var(--c3)">F3</span>
+          <span class="phase-weeks-badge">S7–S8 · 40h</span>
+        </div>
+        <h3>Carrinho e Checkout</h3>
+        <p>Visualizador de foto, wishlist, carrinho persistente, cupom, checkout, gateway e confirmação de pedido.</p>
+        <div class="phase-deliverables">
+          <span class="deliver-chip">T-PF-07</span>
+          <span class="deliver-chip">T-PF-08</span>
+          <span class="deliver-chip">M-PF-03 · M-PF-04</span>
+          <span class="deliver-chip">Webpay · Pix</span>
+        </div>
+      </div>
+
+      <div class="phase-card" style="border-left-color:var(--c4)">
+        <div class="phase-card-header">
+          <span class="phase-num" style="background:var(--c4)">F4</span>
+          <span class="phase-weeks-badge">S9–S10 · 40h</span>
+        </div>
+        <h3>Perfil e Biblioteca PF ◆</h3>
+        <p>Dashboard pessoal, Minha Biblioteca (Compras, Eventos, Favoritos), Meu Perfil, Configurações e todos modais restantes.</p>
+        <div class="phase-deliverables">
+          <span class="deliver-chip">T-PF-03</span>
+          <span class="deliver-chip">T-PF-09 a 12</span>
+          <span class="deliver-chip">M-PF-02,05,06,07</span>
+          <span class="deliver-chip">20 req. PF ✓</span>
+        </div>
+      </div>
+
+      <div class="phase-card" style="border-left-color:var(--c5)">
+        <div class="phase-card-header">
+          <span class="phase-num" style="background:var(--c5)">F5</span>
+          <span class="phase-weeks-badge">S11–S13 · 60h</span>
+        </div>
+        <h3>Painel do Fotógrafo</h3>
+        <p>Cadastro profissional (FT-001), dashboard analítico (FT-007), calendário de eventos, portfólio público e edição de perfil.</p>
+        <div class="phase-deliverables">
+          <span class="deliver-chip">FT-001</span>
+          <span class="deliver-chip">FT-006 · FT-007</span>
+          <span class="deliver-chip">FT-010 · FT-013</span>
+        </div>
+      </div>
+
+      <div class="phase-card" style="border-left-color:var(--c6)">
+        <div class="phase-card-header">
+          <span class="phase-num" style="background:var(--c6)">F6</span>
+          <span class="phase-weeks-badge">S14–S15 · 40h</span>
+        </div>
+        <h3>Upload, Galeria e Preços</h3>
+        <p>Criação de eventos, upload em massa até 1000 arquivos, organização com drag-and-drop, precificação flexível e marca d'água.</p>
+        <div class="phase-deliverables">
+          <span class="deliver-chip">FT-002 · FT-003</span>
+          <span class="deliver-chip">FT-004 · FT-005</span>
+          <span class="deliver-chip">FT-011</span>
+        </div>
+      </div>
+
+      <div class="phase-card" style="border-left-color:var(--c7)">
+        <div class="phase-card-header">
+          <span class="phase-num" style="background:var(--c7)">F7</span>
+          <span class="phase-weeks-badge">S16–S17 · 40h</span>
+        </div>
+        <h3>Vendas e Comunicação ◆</h3>
+        <p>Central de pedidos, repasse automático, chat, cupons, carrinho abandonado, respostas a avaliações e relatórios.</p>
+        <div class="phase-deliverables">
+          <span class="deliver-chip">FT-008 · FT-009</span>
+          <span class="deliver-chip">FT-014 · FT-016</span>
+          <span class="deliver-chip">FT-019</span>
+          <span class="deliver-chip">19 req. FT ✓</span>
+        </div>
+      </div>
+
+      <div class="phase-card" style="border-left-color:var(--c8)">
+        <div class="phase-card-header">
+          <span class="phase-num" style="background:var(--c8)">F8</span>
+          <span class="phase-weeks-badge">S18–S19 · 40h</span>
+        </div>
+        <h3>Studios e Agências ◆</h3>
+        <p>Perfil empresarial, gestão de equipe com permissões, dashboard consolidado, políticas de preço e relatórios gerenciais.</p>
+        <div class="phase-deliverables">
+          <span class="deliver-chip">ST-001 a ST-009</span>
+          <span class="deliver-chip">marca corp.</span>
+          <span class="deliver-chip">controle RBAC</span>
+        </div>
+      </div>
+
+      <div class="phase-card" style="border-left-color:var(--c9)">
+        <div class="phase-card-header">
+          <span class="phase-num" style="background:var(--c9)">F9</span>
+          <span class="phase-weeks-badge">S20–S21 · 40h</span>
+        </div>
+        <h3>Organizadores ◆ MVP Completo</h3>
+        <p>Cadastro de evento, marketplace de fotógrafos, códigos de acesso, curadoria de galeria, dashboard e parcerias.</p>
+        <div class="phase-deliverables">
+          <span class="deliver-chip">OE-001 a OE-012</span>
+          <span class="deliver-chip">4 perfis ✓</span>
+        </div>
+      </div>
+
+      <div class="phase-card" style="border-left-color:var(--c10)">
+        <div class="phase-card-header">
+          <span class="phase-num" style="background:var(--c10)">F10</span>
+          <span class="phase-weeks-badge">S22–S23 · 40h</span>
+        </div>
+        <h3>IA — Reconhecimento Facial</h3>
+        <p>Integração com API de IA, indexação de rostos por evento, stepper de busca, opt-in/out e filtros contextuais.</p>
+        <div class="phase-deliverables">
+          <span class="deliver-chip">PF-003</span>
+          <span class="deliver-chip">FT-012</span>
+          <span class="deliver-chip">T-PF-04 aba 3</span>
+        </div>
+      </div>
+
+      <div class="phase-card" style="border-left-color:var(--c11)">
+        <div class="phase-card-header">
+          <span class="phase-num" style="background:var(--c11)">F11</span>
+          <span class="phase-weeks-badge">S24 · 20h</span>
+        </div>
+        <h3>i18n e Notificações</h3>
+        <p>i18n completo PT/ES/EN em interface, e-mails e notificações. Canal WhatsApp, SMS regional.</p>
+        <div class="phase-deliverables">
+          <span class="deliver-chip">PF-014 · PF-017</span>
+          <span class="deliver-chip">WhatsApp</span>
+          <span class="deliver-chip">3 idiomas ✓</span>
+        </div>
+      </div>
+
+      <div class="phase-card" style="border-left-color:var(--c12)">
+        <div class="phase-card-header">
+          <span class="phase-num" style="background:var(--c12)">F12</span>
+          <span class="phase-weeks-badge">S25–S26 · 40h</span>
+        </div>
+        <h3>QA, Segurança e Performance</h3>
+        <p>Testes de carga (10k usuários), OWASP, LGPD/Chile, WCAG 2.1 AA, testes de regressão e validação de gateways.</p>
+        <div class="phase-deliverables">
+          <span class="deliver-chip">carga &lt;2s</span>
+          <span class="deliver-chip">OWASP</span>
+          <span class="deliver-chip">LGPD/CL</span>
+          <span class="deliver-chip">WCAG 2.1</span>
+        </div>
+      </div>
+
+      <div class="phase-card" style="border-left-color:var(--c13)">
+        <div class="phase-card-header">
+          <span class="phase-num" style="background:var(--c13);color:#202C39">F13</span>
+          <span class="phase-weeks-badge">S27 · 20h</span>
+        </div>
+        <h3>Launch v1.0 🚀</h3>
+        <p>Deploy de produção com zero downtime, monitoramento, alertas, documentação final e plano de suporte.</p>
+        <div class="phase-deliverables">
+          <span class="deliver-chip">prod deploy</span>
+          <span class="deliver-chip">monitoramento</span>
+          <span class="deliver-chip">docs finais</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── SCREENS FLOW ───────────────────────────────────────── -->
+<section class="flow-section">
+  <div class="wrap">
+    <span class="tag" style="margin-bottom:1rem;display:inline-flex">
+      <span class="material-symbols-outlined" style="font-size:.9rem">account_tree</span>
+      Telas
+    </span>
+    <h2 class="section-title">Fluxo de telas — Pessoa Fotografada</h2>
+    <p class="section-sub">21 superfícies (telas + modais) cobrindo todos os 20 requisitos do perfil PF.</p>
+
+    <div class="flow-diagram">
+
+      <!-- Auth flow -->
+      <div class="flow-row">
+        <div class="flow-label">Entrada</div>
+        <div class="flow-items">
+          <div class="flow-screen">T-PF-01 Onboarding</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-screen">T-PF-02 Login / Cadastro</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-modal">M-PF-01 Completar Perfil</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-screen milestone-screen">T-PF-03 Dashboard (Home)</div>
+        </div>
+      </div>
+      <div class="flow-divider"></div>
+
+      <!-- Discovery flow -->
+      <div class="flow-row">
+        <div class="flow-label">Descoberta</div>
+        <div class="flow-items">
+          <div class="flow-screen">T-PF-04 Busca</div>
+          <div class="flow-arrow" style="font-size:.7rem">Eventos ↓<br>Fotógr. ↓<br>IA Facial ↓</div>
+          <div class="flow-screen">T-PF-05 Detalhe Evento</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-screen">T-PF-06 Perfil Fotógrafo</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-modal">M-PF-04 Avaliar</div>
+        </div>
+      </div>
+      <div class="flow-divider"></div>
+
+      <!-- Purchase flow -->
+      <div class="flow-row">
+        <div class="flow-label">Compra</div>
+        <div class="flow-items">
+          <div class="flow-screen">T-PF-07 Visualizador</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-screen milestone-screen">T-PF-08 Carrinho + Checkout</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-modal">M-PF-03 Confirmação</div>
+          <div class="flow-arrow">&amp;</div>
+          <div class="flow-modal">M-PF-09 Compartilhar</div>
+          <div class="flow-arrow">&amp;</div>
+          <div class="flow-modal">M-PF-08 Remoção</div>
+        </div>
+      </div>
+      <div class="flow-divider"></div>
+
+      <!-- Library flow -->
+      <div class="flow-row">
+        <div class="flow-label">Biblioteca</div>
+        <div class="flow-items">
+          <div class="flow-screen milestone-screen">T-PF-09 Minha Biblioteca</div>
+          <div class="flow-arrow" style="font-size:.7rem">Compras ↕<br>Eventos ↕<br>Favoritos ↕</div>
+          <div class="flow-modal">M-PF-02 Notificações</div>
+        </div>
+      </div>
+      <div class="flow-divider"></div>
+
+      <!-- Profile flow -->
+      <div class="flow-row">
+        <div class="flow-label">Perfil</div>
+        <div class="flow-items">
+          <div class="flow-screen">T-PF-10 Meu Perfil</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-screen">T-PF-11 Editar Perfil</div>
+          <div class="flow-arrow">&amp;</div>
+          <div class="flow-modal">M-PF-05 Verificação ID</div>
+          <div class="flow-arrow">&amp;</div>
+          <div class="flow-modal">M-PF-06 Habilitar Fotógrafo</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-screen">T-PF-12 Configurações</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-modal">M-PF-07 Excluir Conta</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── SCREEN SPECIFICATIONS ────────────────────────────────── -->
+<section style="border-top:1px solid var(--border)">
+  <div class="wrap">
+    <span class="tag" style="margin-bottom:1rem;display:inline-flex">
+      <span class="material-symbols-outlined" style="font-size:.9rem">phone_iphone</span>
+      Especificação de Telas
+    </span>
+    <h2 class="section-title" style="margin-bottom:.4rem">Telas detalhadas — Pessoa Fotografada</h2>
+    <p class="section-sub">12 telas principais + 9 modais/sub-elementos. Clique em cada tela para ver os elementos.</p>
+
+    <div class="screen-accordion">
+
+      <div class="screen-group-label">Telas Principais (12)</div>
+
+      <!-- T-PF-01 -->
+      <div class="screen-item-acc">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">T-PF-01</span>
+          <span class="screen-acc-name">Onboarding / Boas-vindas</span>
+          <span class="screen-acc-reqs"></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Exibida apenas na primeira abertura. Apresenta os diferenciais da plataforma em carrossel e conduz ao cadastro ou login.</p>
+          <ul class="screen-acc-elements">
+            <li>Carrossel com 3–4 slides ilustrativos (encontre suas fotos, compre com segurança, descubra fotógrafos)</li>
+            <li>Indicador de progresso dos slides</li>
+            <li>Botão "Criar minha conta" → T-PF-02</li>
+            <li>Link "Já tenho conta — Entrar" → T-PF-02</li>
+            <li>Opção de pular onboarding</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- T-PF-02 -->
+      <div class="screen-item-acc">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">T-PF-02</span>
+          <span class="screen-acc-name">Login e Cadastro</span>
+          <span class="screen-acc-reqs"><span class="screen-acc-req">PF-001</span></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Tela unificada de autenticação. Ao concluir cadastro pela primeira vez, exibe M-PF-01 como bottom sheet.</p>
+          <ul class="screen-acc-elements">
+            <li>Botão de login com Google</li>
+            <li>Divisor "ou" + campos de e-mail e senha (toggle de visibilidade)</li>
+            <li>Link "Esqueci minha senha" → fluxo de recuperação por e-mail</li>
+            <li>Toggle entre modo Login / Cadastro</li>
+            <li>Formulário de cadastro: nome completo, e-mail, telefone (opcional), data de nascimento, senha</li>
+            <li>Checkbox de aceite de Termos de Uso e Política de Privacidade</li>
+            <li>Botão "Entrar" / "Cadastrar"</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- T-PF-03 -->
+      <div class="screen-item-acc">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">T-PF-03</span>
+          <span class="screen-acc-name">Dashboard Pessoal (Home)</span>
+          <span class="screen-acc-reqs"><span class="screen-acc-req">PF-011</span><span class="screen-acc-req">PF-017</span></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Tela principal pós-login com destaques personalizados. O ícone de sino abre M-PF-02 como drawer lateral.</p>
+          <ul class="screen-acc-elements">
+            <li>Saudação com nome e foto de perfil</li>
+            <li>Banner "Novas fotos encontradas para você" (quando houver)</li>
+            <li>Seção "Eventos recentes na sua região" — cards com foto de capa, nome e data</li>
+            <li>Seção "Fotos recém-adquiridas" — miniaturas com link para download</li>
+            <li>Seção "Fotógrafos favoritos — novidades"</li>
+            <li>Seção "Cupons disponíveis" (se houver)</li>
+            <li>Ícone de notificações com badge → M-PF-02</li>
+            <li>Barra de navegação inferior: Home | Buscar | Carrinho | Perfil</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- T-PF-04 -->
+      <div class="screen-item-acc">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">T-PF-04</span>
+          <span class="screen-acc-name">Busca</span>
+          <span class="screen-acc-reqs"><span class="screen-acc-req">PF-002</span><span class="screen-acc-req">PF-003</span><span class="screen-acc-req">PF-004</span></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Tela unificada de descoberta com três abas. Centraliza todas as modalidades de busca em um único destino.</p>
+          <ul class="screen-acc-elements">
+            <li><strong>Aba 1 — Eventos:</strong> campo de busca por texto; filtros: localização (cidade/raio), categoria, período, fotógrafo; resultados em grade; ordenação: relevância | data | mais fotos</li>
+            <li><strong>Aba 2 — Fotógrafos:</strong> busca por nome; filtros: especialidade, região, avaliação mínima, faixa de preço; card com foto de perfil, especialidades, avaliação e 3–4 amostras; ordenação: relevância | maior avaliação | mais vendas</li>
+            <li><strong>Aba 3 — Buscar minhas fotos (IA):</strong> stepper 3 etapas</li>
+            <li class="modal-sub">Etapa 1: upload ou captura de selfie como foto de referência + aviso de privacidade</li>
+            <li class="modal-sub">Etapa 2: escopo (evento específico ou todos os eventos participados) + filtros contextuais por categoria</li>
+            <li class="modal-sub">Etapa 3: grade de resultados com nível de confiança (alta/média); ações: favoritar, adicionar ao carrinho, visualizar</li>
+            <li>Indicador de processamento enquanto a IA executa a busca</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- T-PF-05 -->
+      <div class="screen-item-acc">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">T-PF-05</span>
+          <span class="screen-acc-name">Detalhe do Evento</span>
+          <span class="screen-acc-reqs"><span class="screen-acc-req">PF-002</span><span class="screen-acc-req">PF-010</span><span class="screen-acc-req">PF-015</span><span class="screen-acc-req">PF-019</span></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Página do evento com informações completas e galeria. Ponto de entrada para compra, busca por rosto e marcação de participação.</p>
+          <ul class="screen-acc-elements">
+            <li>Foto de capa em destaque</li>
+            <li>Nome, data, local e categoria do evento</li>
+            <li>Fotógrafo(s) vinculado(s) → T-PF-06</li>
+            <li>Número total de fotos disponíveis</li>
+            <li>Botão "Buscar minhas fotos neste evento" → T-PF-04 (aba 3, pré-filtrado)</li>
+            <li>Botão "Marcar que participei" → adiciona ao histórico (PF-010)</li>
+            <li>Grade de fotos com miniaturas e marca d'água: ícone de coração (favoritar), ícone de carrinho, menu de contexto "Solicitar remoção" → M-PF-08</li>
+            <li>Paginação ou scroll infinito</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- T-PF-06 -->
+      <div class="screen-item-acc">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">T-PF-06</span>
+          <span class="screen-acc-name">Perfil do Fotógrafo</span>
+          <span class="screen-acc-reqs"><span class="screen-acc-req">PF-004</span><span class="screen-acc-req">PF-016</span></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Página pública do fotógrafo. Após compra ou pós-confirmação de pedido, exibe M-PF-04 como bottom sheet.</p>
+          <ul class="screen-acc-elements">
+            <li>Foto de perfil, nome artístico e selo de verificação (se aplicável)</li>
+            <li>Bio, especialidades, região de atuação e anos de experiência</li>
+            <li>Estatísticas públicas: avaliação média, nº de avaliações, eventos cobertos</li>
+            <li>Botão "Favoritar fotógrafo"</li>
+            <li>Botão "Entrar em contato" (requer login)</li>
+            <li>Portfólio em grade, organizado por categoria</li>
+            <li>Eventos recentes cobertos (cards → T-PF-05)</li>
+            <li>Seção de avaliações: estrelas + comentários</li>
+            <li>Botão "Avaliar" (visível somente para quem comprou fotos) → M-PF-04</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- T-PF-07 -->
+      <div class="screen-item-acc">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">T-PF-07</span>
+          <span class="screen-acc-name">Visualizador de Foto</span>
+          <span class="screen-acc-reqs"><span class="screen-acc-req">PF-008</span><span class="screen-acc-req">PF-015</span><span class="screen-acc-req">PF-018</span><span class="screen-acc-req">PF-019</span></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Visualização ampliada de uma foto individual com todas as ações de interação. Aciona M-PF-09 e M-PF-08 via menu de contexto.</p>
+          <ul class="screen-acc-elements">
+            <li>Foto em alta resolução com marca d'água (preview)</li>
+            <li>Nome do evento e fotógrafo (links clicáveis)</li>
+            <li>Seletor de produto: download digital (resoluções) | impressão física (tamanhos) | combo</li>
+            <li>Preço conforme seleção</li>
+            <li>Botão "Adicionar ao carrinho" → T-PF-08</li>
+            <li>Ícone de favoritar</li>
+            <li>Botão "Compartilhar" → M-PF-09</li>
+            <li>Menu de contexto (⋯): "Solicitar remoção desta foto" → M-PF-08</li>
+            <li>Navegação entre fotos do mesmo evento (anterior / próxima)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- T-PF-08 -->
+      <div class="screen-item-acc">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">T-PF-08</span>
+          <span class="screen-acc-name">Carrinho e Checkout</span>
+          <span class="screen-acc-reqs"><span class="screen-acc-req">PF-008</span><span class="screen-acc-req">PF-013</span></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Tela em duas etapas. Etapa 1 (Carrinho): revisão dos itens. Etapa 2 (Checkout): pagamento. Ao confirmar, exibe M-PF-03.</p>
+          <ul class="screen-acc-elements">
+            <li><strong>Etapa 1 — Carrinho:</strong></li>
+            <li class="modal-sub">Itens agrupados por fotógrafo/evento: miniatura, tipo de produto (editável), preço unitário, botão de remover</li>
+            <li class="modal-sub">Campo de cupom inline: input + "Aplicar"; feedback em tempo real; exibe valor do desconto e termos</li>
+            <li class="modal-sub">Resumo: subtotal, desconto, total</li>
+            <li class="modal-sub">Botão "Ir para pagamento" / Link "Continuar comprando"</li>
+            <li class="modal-sub">Estado vazio: ilustração + botão "Explorar eventos"</li>
+            <li><strong>Etapa 2 — Checkout:</strong></li>
+            <li class="modal-sub">Resumo compacto dos itens (colapsável)</li>
+            <li class="modal-sub">Se produto físico: seção de endereço de entrega + seletor de frete</li>
+            <li class="modal-sub">Métodos de pagamento: Webpay (CL), Pix, Mercado Pago, PagSeguro, cartão</li>
+            <li class="modal-sub">Formulário de cartão (quando aplicável)</li>
+            <li class="modal-sub">Total final + indicador de segurança SSL + botão "Confirmar e pagar"</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- T-PF-09 -->
+      <div class="screen-item-acc">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">T-PF-09</span>
+          <span class="screen-acc-name">Minha Biblioteca</span>
+          <span class="screen-acc-reqs"><span class="screen-acc-req">PF-009</span><span class="screen-acc-req">PF-010</span><span class="screen-acc-req">PF-015</span></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Centro de coleções pessoais em três abas. Substitui as antigas telas separadas de histórico de compras, eventos e wishlist.</p>
+          <ul class="screen-acc-elements">
+            <li><strong>Aba 1 — Compras:</strong> filtros (período, evento, fotógrafo, status); lista com miniaturas, valor, status badge; ações: baixar / rastrear, nota fiscal, re-download</li>
+            <li><strong>Aba 2 — Eventos:</strong> timeline vertical (mais recente no topo); card com foto de capa, nome, data, local, nº de fotos, badge "X fotos suas aqui"; FAB "Marcar participação em evento"; filtro por ano</li>
+            <li><strong>Aba 3 — Favoritos:</strong> grade de fotos com badge "Em promoção!" quando aplicável; ações: adicionar ao carrinho, remover dos favoritos; filtros: evento | fotógrafo | em promoção; estado vazio ilustrado</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- T-PF-10 -->
+      <div class="screen-item-acc">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">T-PF-10</span>
+          <span class="screen-acc-name">Meu Perfil</span>
+          <span class="screen-acc-reqs"><span class="screen-acc-req">PF-005</span><span class="screen-acc-req">PF-006</span><span class="screen-acc-req">PF-020</span></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Hub central do perfil. Concentra status de verificação, acesso à biblioteca, configurações e conta de fotógrafo.</p>
+          <ul class="screen-acc-elements">
+            <li>Foto de perfil, nome e e-mail</li>
+            <li>Selo "Verificado" ou botão "Verificar identidade" → M-PF-05</li>
+            <li>Estatísticas rápidas: eventos participados | fotos compradas | fotógrafos favoritos</li>
+            <li>Botão "Editar perfil" → T-PF-11</li>
+            <li>Links de acesso rápido: Minha Biblioteca → T-PF-09 | Configurações → T-PF-12</li>
+            <li>Seção "Conta de Fotógrafo": card informativo + botão "Habilitar" → M-PF-06 (se não habilitada)</li>
+            <li>Se habilitada: botão "Acessar painel de fotógrafo"</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- T-PF-11 -->
+      <div class="screen-item-acc">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">T-PF-11</span>
+          <span class="screen-acc-name">Editar Perfil</span>
+          <span class="screen-acc-reqs"><span class="screen-acc-req">PF-006</span><span class="screen-acc-req">PF-014</span></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Formulário de atualização dos dados pessoais e preferências de conta.</p>
+          <ul class="screen-acc-elements">
+            <li>Upload / troca de foto de perfil (câmera ou galeria)</li>
+            <li>Campos: nome completo, e-mail, telefone, data de nascimento</li>
+            <li>Seção "Endereço de entrega" (para produtos físicos)</li>
+            <li>Seção "Redes sociais" (links opcionais: Instagram, LinkedIn, etc.)</li>
+            <li>Seção "Pagamento" — cartões salvos com opção de gerenciar</li>
+            <li>Seletor de idioma preferido: PT-BR | ES-CL | EN</li>
+            <li>Botão "Salvar alterações" / Botão "Cancelar"</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- T-PF-12 -->
+      <div class="screen-item-acc">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">T-PF-12</span>
+          <span class="screen-acc-name">Configurações</span>
+          <span class="screen-acc-reqs"><span class="screen-acc-req">PF-007</span><span class="screen-acc-req">PF-012</span><span class="screen-acc-req">PF-014</span><span class="screen-acc-req">PF-017</span></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Tela única de configurações em seções. Concentra privacidade, notificações, idioma e exclusão de conta.</p>
+          <ul class="screen-acc-elements">
+            <li><strong>Seção Privacidade:</strong> toggle perfil público/privado; toggle identificação facial automática; toggle ocultar histórico de eventos; toggle permitir contato de fotógrafos; toggle fotos compradas em galeria pública; link "O que cada configuração significa?"</li>
+            <li><strong>Seção Notificações:</strong> toggle geral por canal (E-mail | WhatsApp | SMS); por canal: toggles por tipo (novas fotos, eventos na região, promoções, mensagens de fotógrafos, wishlist em promoção, carrinho abandonado)</li>
+            <li><strong>Seção Idioma:</strong> seletor PT-BR | ES-CL | EN</li>
+            <li><strong>Seção Conta (zona de perigo):</strong> link "Excluir minha conta" → M-PF-07</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="screen-group-label">Modais e Sub-elementos (9)</div>
+
+      <!-- M-PF-01 -->
+      <div class="screen-item-acc modal-item">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">M-PF-01</span>
+          <span class="screen-acc-name">Completar Perfil</span>
+          <span class="screen-acc-reqs"><span class="screen-acc-req" style="opacity:.7">bottom sheet</span><span class="screen-acc-req">PF-001</span><span class="screen-acc-req">PF-006</span></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Exibido logo após o primeiro cadastro (acionado por T-PF-02).</p>
+          <ul class="screen-acc-elements">
+            <li>Upload de foto de perfil (câmera ou galeria)</li>
+            <li>Campo de nome de exibição</li>
+            <li>Seletor de idioma preferido: PT-BR | ES | EN</li>
+            <li>Campo de cidade/região (sugestão por geolocalização)</li>
+            <li>Botão "Concluir" / Link "Fazer isso depois"</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- M-PF-02 -->
+      <div class="screen-item-acc modal-item">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">M-PF-02</span>
+          <span class="screen-acc-name">Central de Notificações</span>
+          <span class="screen-acc-reqs"><span class="screen-acc-req" style="opacity:.7">drawer</span><span class="screen-acc-req">PF-017</span></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Drawer lateral (70–80% da largura) acionado pelo ícone de sino em T-PF-03.</p>
+          <ul class="screen-acc-elements">
+            <li>Filtros: Todas | Fotos | Eventos | Promoções | Mensagens</li>
+            <li>Lista com ícone, título, resumo e timestamp por notificação</li>
+            <li>Indicação visual de não lida (fundo diferenciado)</li>
+            <li>Ação "Marcar todas como lidas" / excluir individual</li>
+            <li>Cada notificação clicável navega para a tela correspondente</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- M-PF-03 -->
+      <div class="screen-item-acc modal-item">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">M-PF-03</span>
+          <span class="screen-acc-name">Confirmação de Pedido</span>
+          <span class="screen-acc-reqs"><span class="screen-acc-req" style="opacity:.7">modal overlay</span><span class="screen-acc-req">PF-008</span><span class="screen-acc-req">PF-009</span></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Exibido após pagamento confirmado em T-PF-08.</p>
+          <ul class="screen-acc-elements">
+            <li>Animação de sucesso + número do pedido</li>
+            <li>Resumo do que foi comprado</li>
+            <li>Botão "Baixar agora" (digital) ou prazo de entrega (físico)</li>
+            <li>Link "Ver no histórico" → T-PF-09 (aba Compras)</li>
+            <li>Botão "Avaliar fotógrafo" → M-PF-04</li>
+            <li>Botão "Continuar explorando"</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- M-PF-04 -->
+      <div class="screen-item-acc modal-item">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">M-PF-04</span>
+          <span class="screen-acc-name">Avaliar Fotógrafo</span>
+          <span class="screen-acc-reqs"><span class="screen-acc-req" style="opacity:.7">bottom sheet</span><span class="screen-acc-req">PF-016</span></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Acionado em T-PF-06 (botão "Avaliar") ou M-PF-03 (botão pós-compra). Visível apenas para quem comprou fotos do fotógrafo.</p>
+          <ul class="screen-acc-elements">
+            <li>Foto e nome do fotógrafo</li>
+            <li>Nota geral: 1–5 estrelas</li>
+            <li>Sub-critérios opcionais: qualidade das fotos, atendimento, experiência geral</li>
+            <li>Campo de comentário livre</li>
+            <li>Botão "Enviar avaliação" / Link "Agora não"</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- M-PF-05 -->
+      <div class="screen-item-acc modal-item">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">M-PF-05</span>
+          <span class="screen-acc-name">Verificação de Identidade</span>
+          <span class="screen-acc-reqs"><span class="screen-acc-req" style="opacity:.7">modal multi-step</span><span class="screen-acc-req">PF-005</span></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Acionado por T-PF-10 (botão "Verificar identidade").</p>
+          <ul class="screen-acc-elements">
+            <li>Explicação dos benefícios (selo, prioridade em buscas)</li>
+            <li>Seletor de país → documento exigido (RUT / RG ou CPF)</li>
+            <li>Passo 1: foto da frente do documento</li>
+            <li>Passo 2: foto do verso do documento</li>
+            <li>Passo 3: selfie com documento (liveness check)</li>
+            <li>Aviso de privacidade e uso dos dados</li>
+            <li>Status após envio: "Em análise" / "Verificado" / "Recusado — tente novamente"</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- M-PF-06 -->
+      <div class="screen-item-acc modal-item">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">M-PF-06</span>
+          <span class="screen-acc-name">Habilitar Conta de Fotógrafo</span>
+          <span class="screen-acc-reqs"><span class="screen-acc-req" style="opacity:.7">modal multi-step</span><span class="screen-acc-req">PF-020</span></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Acionado por T-PF-10 (seção Conta de Fotógrafo). Permite que um usuário fotografado ative também o perfil de fotógrafo.</p>
+          <ul class="screen-acc-elements">
+            <li>Explicação do que muda ao habilitar (acesso ao painel, upload, vendas)</li>
+            <li>Checklist de requisitos: portfólio mínimo (10 fotos), dados profissionais, telefone comercial, aceite dos termos</li>
+            <li>Formulário dos dados ainda não preenchidos</li>
+            <li>Upload do portfólio inicial (mínimo 10 fotos)</li>
+            <li>Botão "Habilitar perfil de fotógrafo"</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- M-PF-07 -->
+      <div class="screen-item-acc modal-item">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">M-PF-07</span>
+          <span class="screen-acc-name">Excluir Conta</span>
+          <span class="screen-acc-reqs"><span class="screen-acc-req" style="opacity:.7">modal confirmação</span><span class="screen-acc-req">PF-007</span></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Acionado por T-PF-12 (zona de perigo). Processo de exclusão permanente em 2 etapas.</p>
+          <ul class="screen-acc-elements">
+            <li>Aviso sobre irreversibilidade e lista de consequências (perda de acesso às fotos, etc.)</li>
+            <li>Etapa 1: checkbox "Entendo que esta ação é permanente"</li>
+            <li>Etapa 2: campo para digitar a senha atual</li>
+            <li>Botão "Excluir permanentemente" (vermelho, destrutivo)</li>
+            <li>Botão "Cancelar" (em destaque maior que o destrutivo)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- M-PF-08 -->
+      <div class="screen-item-acc modal-item">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">M-PF-08</span>
+          <span class="screen-acc-name">Solicitar Remoção de Foto</span>
+          <span class="screen-acc-reqs"><span class="screen-acc-req" style="opacity:.7">modal</span><span class="screen-acc-req">PF-019</span></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Acionado pelo menu de contexto em T-PF-07 ou T-PF-05.</p>
+          <ul class="screen-acc-elements">
+            <li>Miniatura da foto em questão</li>
+            <li>Campo de motivo (lista: direito de imagem, conteúdo inadequado, outro)</li>
+            <li>Descrição opcional da situação</li>
+            <li>Botão "Enviar solicitação"</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- M-PF-09 -->
+      <div class="screen-item-acc modal-item">
+        <div class="screen-acc-header">
+          <span class="screen-acc-id">M-PF-09</span>
+          <span class="screen-acc-name">Compartilhar Foto</span>
+          <span class="screen-acc-reqs"><span class="screen-acc-req" style="opacity:.7">bottom sheet</span><span class="screen-acc-req">PF-018</span></span>
+          <span class="screen-acc-chevron"><span class="material-symbols-outlined" style="font-size:1.2rem">expand_more</span></span>
+        </div>
+        <div class="screen-acc-body">
+          <p class="screen-acc-desc">Acionado pelo botão "Compartilhar" em T-PF-07. Disponível apenas após a compra da foto.</p>
+          <ul class="screen-acc-elements">
+            <li>Prévia com marca d'água reduzida (qualidade inferior para evitar pirataria)</li>
+            <li>Atalhos para redes sociais: Instagram, Facebook, WhatsApp, X (Twitter), etc.</li>
+            <li>Opção de copiar link da prévia</li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- /screen-accordion -->
+  </div>
+</section>
+
+<!-- ─── NON-FUNCTIONAL ────────────────────────────────────── -->
+<section style="background:rgba(242,149,89,.02);border-top:1px solid var(--border);padding:4rem 0">
+  <div class="wrap">
+    <span class="tag" style="margin-bottom:1rem;display:inline-flex">
+      <span class="material-symbols-outlined" style="font-size:.9rem">verified_user</span>
+      Requisitos Não-Funcionais
+    </span>
+    <h2 class="section-title" style="margin-bottom:2rem">Qualidade e confiabilidade</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem">
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">⚡</div>
+        <h3 style="font-size:1rem;margin-bottom:.4rem">Performance</h3>
+        <p style="color:var(--dim);font-size:.85rem">Carregamento &lt;2s · 10k usuários simultâneos · CDN para imagens · upload assíncrono</p>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🔒</div>
+        <h3 style="font-size:1rem;margin-bottom:.4rem">Segurança</h3>
+        <p style="color:var(--dim);font-size:.85rem">OAuth 2.0 + JWT · SSL/TLS · conformidade LGPD (BR) e Lei de Dados (CL) · anti-DDoS</p>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">📱</div>
+        <h3 style="font-size:1rem;margin-bottom:.4rem">Usabilidade</h3>
+        <p style="color:var(--dim);font-size:.85rem">Mobile-first · webview-ready · WCAG 2.1 AA · máx. 3 cliques para funções críticas</p>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">📈</div>
+        <h3 style="font-size:1rem;margin-bottom:.4rem">Escalabilidade</h3>
+        <p style="color:var(--dim);font-size:.85rem">Arquitetura horizontal · cache inteligente · CDN · preparada para crescimento</p>
+      </div>
+
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem">
+        <div style="font-size:1.5rem;margin-bottom:.5rem">🔗</div>
+        <h3 style="font-size:1rem;margin-bottom:.4rem">Integrações</h3>
+        <p style="color:var(--dim);font-size:.85rem">Webpay · Pix · Mercado Pago · PagSeguro · Google Maps · SendGrid · GA · IA facial</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── TERMOS E CONDIÇÕES ─────────────────────────────────── -->
+<section style="border-top:1px solid var(--border);padding:5rem 0">
+  <div class="wrap">
+    <span class="tag" style="margin-bottom:1rem;display:inline-flex">
+      <span class="material-symbols-outlined" style="font-size:.9rem">gavel</span>
+      Termos e Condições
+    </span>
+    <h2 class="section-title" style="margin-bottom:.4rem">Instrumento de Prestação de Serviços</h2>
+    <p class="section-sub">Tech for Equity (T4E) — Capital técnico e intelectual a preço de custo em troca de participação acionária.</p>
+
+    <!-- Partes -->
+    <div class="terms-parties">
+      <div class="terms-party">
+        <div class="terms-party-label">Contratante</div>
+        <div class="terms-party-name">[Nome/Razão Social]</div>
+        <div class="terms-party-detail">[CNPJ/CPF] · [Endereço]</div>
+      </div>
+      <div class="terms-party">
+        <div class="terms-party-label">Contratada</div>
+        <div class="terms-party-name">Lab904</div>
+        <div class="terms-party-detail">[CNPJ] · [Endereço]</div>
+      </div>
+    </div>
+
+    <!-- Cláusulas -->
+    <div class="terms-grid">
+
+      <!-- Cláusula 1 -->
+      <div class="terms-card">
+        <div class="terms-card-header">
+          <div class="terms-card-num">1</div>
+          <h3>Do Objeto e Modelo de Trabalho</h3>
+        </div>
+        <div class="terms-card-body">
+          <p><span class="terms-sub-id">1.1.</span> O presente contrato tem por objeto a prestação de serviços de desenvolvimento de capital técnico e intelectual pela CONTRATADA em favor da CONTRATANTE.</p>
+          <p><span class="terms-sub-id">1.2.</span> As partes adotam o modelo <strong>Tech for Equity (T4E)</strong>, que consiste no aporte de expertise técnica e horas de desenvolvimento a preço de custo pela CONTRATADA, em contrapartida à participação acionária e participação nos lucros da CONTRATANTE.</p>
+        </div>
+      </div>
+
+      <!-- Cláusula 2 -->
+      <div class="terms-card">
+        <div class="terms-card-header">
+          <div class="terms-card-num">2</div>
+          <h3>Da Remuneração e Divisão de Lucros Diferenciada</h3>
+        </div>
+        <div class="terms-card-body">
+          <p><span class="terms-sub-id">2.1.</span> O valor total de mercado do projeto é calculado com base na tarifa de <span class="terms-highlight">R$ 250,00/h</span>. Durante a execução, a CONTRATANTE paga apenas o valor de custo <span class="terms-highlight">R$ 50,00/h</span>.</p>
+          <p><span class="terms-sub-id">2.2.</span> A diferença de <span class="terms-highlight">R$ 200,00</span> por hora trabalhada constitui o crédito de capital intelectual da CONTRATADA, cujo teto para recuperação prioritária é fixado em <span class="terms-highlight">R$ 108.000,00</span> (cento e oito mil reais).</p>
+          <p><span class="terms-sub-id">2.3.</span> <strong>Prioridade na Distribuição de Lucros:</strong> A partir do início do faturamento da nova entidade, a CONTRATADA terá direito a uma divisão de lucros preferencial (100% do lucro distribuível ou percentual a definir em Acordo de Sócios) até que o montante de R$ 108.000,00 seja integralmente quitado.</p>
+          <p><span class="terms-sub-id">2.4.</span> <strong>Atualização Monetária:</strong> O saldo remanescente deste crédito será corrigido mensalmente pelo IPCA (IBGE) sob regime de juros compostos. Em caso de deflação (IPCA negativo), o valor nominal do mês não será alterado, permanecendo estagnado até o próximo índice positivo.</p>
+          <p><span class="terms-sub-id">2.5.</span> <strong>Prazo de Quitação e Garantia:</strong> O prazo para o atingimento deste valor via lucros é de <span class="terms-highlight">2 anos</span> a contar da fundação da nova entidade jurídica.</p>
+          <p style="padding-left:1rem"><span class="terms-sub-id">2.5.1.</span> Caso o lucro acumulado em 24 meses não seja suficiente para cobrir os R$ 108.000,00 (corrigidos), o saldo devedor remanescente poderá ser cobrado diretamente dos demais acionistas/sócios fundadores, de forma solidária ou proporcional.</p>
+          <p><span class="terms-sub-id">2.6.</span> Após a quitação integral do valor supracitado, a CONTRATADA passará a receber dividendos de forma paritária aos demais acionistas, seguindo estritamente sua participação de <span class="terms-highlight">35%</span> nas cotas.</p>
+        </div>
+      </div>
+
+      <!-- Cláusula 3 -->
+      <div class="terms-card">
+        <div class="terms-card-header">
+          <div class="terms-card-num">3</div>
+          <h3>Das Condições de Pagamento e Marcos (Milestones)</h3>
+        </div>
+        <div class="terms-card-body">
+          <p><span class="terms-sub-id">3.1.</span> O pagamento das horas (<span class="terms-highlight">R$ 50,00/h</span>) ocorrerá de forma vinculada ao atingimento de marcos do projeto (milestones) previamente definidos em cronograma anexo.</p>
+          <p><span class="terms-sub-id">3.2.</span> As horas acumuladas serão faturadas ao final de cada marco, podendo haver negociações individuais de prazos e valores por marco, desde que acordado por escrito entre as partes.</p>
+        </div>
+      </div>
+
+      <!-- Cláusula 4 -->
+      <div class="terms-card">
+        <div class="terms-card-header">
+          <div class="terms-card-num">4</div>
+          <h3>Da Propriedade Intelectual (PI)</h3>
+        </div>
+        <div class="terms-card-body">
+          <p><span class="terms-sub-id">4.1.</span> Toda a Propriedade Intelectual, códigos-fonte, arquiteturas e ativos desenvolvidos pela CONTRATADA pertencerão <strong>exclusivamente à CONTRATADA (Lab904)</strong> até que ocorra o evento de liquidez ou gatilho societário.</p>
+          <p><span class="terms-sub-id">4.2.</span> O gatilho para a transferência da PI será a criação de uma nova entidade jurídica (empresa) com faturamento iminente e a devida formalização da distribuição das cotas (<span class="terms-highlight">35%</span>) em favor da CONTRATADA.</p>
+          <p><span class="terms-sub-id">4.3.</span> Somente após a efetiva subscrição das quotas e registro nos órgãos competentes, a PI será transferida para a nova entidade.</p>
+        </div>
+      </div>
+
+      <!-- Cláusula 5 -->
+      <div class="terms-card">
+        <div class="terms-card-header">
+          <div class="terms-card-num">5</div>
+          <h3>Da Rescisão e Saída (Bad Leaving)</h3>
+        </div>
+        <div class="terms-card-body">
+          <p><span class="terms-sub-id">5.1.</span> Em caso de rescisão antecipada motivada por descumprimento contratual ou abandono (Bad Leaving):</p>
+          <ul class="terms-sub-list">
+            <li>A CONTRATADA transferirá para a CONTRATANTE o que já foi efetivamente desenvolvido e entregue até o último marco concluído.</li>
+            <li>As horas trabalhadas e pendentes de pagamento até o marco em vigor serão faturadas e pagas imediatamente.</li>
+            <li>Desenvolvimentos em curso que não atingiram o próximo marco previsto não serão objeto de faturamento ou entrega, salvo negociação posterior.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Cláusula 6 -->
+      <div class="terms-card">
+        <div class="terms-card-header">
+          <div class="terms-card-num">6</div>
+          <h3>Da Confidencialidade (NDA)</h3>
+        </div>
+        <div class="terms-card-body">
+          <p><span class="terms-sub-id">6.1.</span> <strong>Definição de Informação Confidencial:</strong> As Partes comprometem-se a manter sigilo absoluto sobre toda e qualquer informação técnica, comercial, financeira, segredos de negócio, estratégias de marketing, algoritmos e códigos-fonte compartilhados em razão deste contrato.</p>
+          <p><span class="terms-sub-id">6.2.</span> <strong>Uso Restrito:</strong> As informações reveladas só poderão ser utilizadas para o estrito cumprimento do objeto deste contrato, sendo vedada a reprodução ou compartilhamento com terceiros sem autorização prévia por escrito.</p>
+          <p><span class="terms-sub-id">6.3.</span> <strong>Exceções:</strong> Não serão consideradas confidenciais informações que já sejam de domínio público, que tenham sido legitimamente obtidas de terceiros ou que devam ser reveladas por ordem judicial ou governamental.</p>
+          <p><span class="terms-sub-id">6.4.</span> <strong>Duração da Obrigação:</strong> O dever de confidencialidade subsistirá por um período de <span class="terms-highlight">5 anos</span> após o término ou rescisão deste contrato, independentemente do motivo da extinção da parceria.</p>
+          <p><span class="terms-sub-id">6.5.</span> <strong>Penalidades:</strong> O descumprimento desta cláusula sujeitará a parte infratora ao pagamento de multa indenizatória, além da apuração de perdas e danos e rescisão imediata por "Bad Leaving".</p>
+        </div>
+      </div>
+
+      <!-- Cláusula 7 -->
+      <div class="terms-card">
+        <div class="terms-card-header">
+          <div class="terms-card-num">7</div>
+          <h3>Do Esforço, Estimativas e Custos Operacionais</h3>
+        </div>
+        <div class="terms-card-body">
+          <p><span class="terms-sub-id">7.1.</span> <strong>Previsibilidade de Esforço:</strong> As Partes acordam que eventuais desvios de esforço (excesso de horas trabalhadas além do estimado para um marco) durante o período de desenvolvimento não impactarão o cronograma financeiro ou as estimativas de custo do projeto para a CONTRATANTE. A CONTRATADA assume o risco técnico de execução dentro das horas orçadas para cada entrega.</p>
+          <p><span class="terms-sub-id">7.2.</span> <strong>Custos de Software:</strong> O valor de custo (<span class="terms-highlight">R$ 50,00/h</span>) já contempla o uso de softwares, ferramentas de desenvolvimento e licenças internas da Lab904 necessárias para a construção do projeto.</p>
+          <p><span class="terms-sub-id">7.3.</span> <strong>Exclusões de Investimento (Deploy):</strong> Não estão incluídos no preço de custo, devendo ser custeados diretamente pela CONTRATANTE ou pela nova entidade:</p>
+          <ul class="terms-sub-list">
+            <li>Aquisição e renovação de domínios</li>
+            <li>Servidores de produção, instâncias de Cloud e armazenamento de dados</li>
+            <li>APIs de terceiros com cobrança por uso (ex: OpenAI, Google Maps, etc.)</li>
+            <li>Taxas de publicação em lojas de aplicativos (Apple Store / Google Play)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Cláusula 8 -->
+      <div class="terms-card">
+        <div class="terms-card-header">
+          <div class="terms-card-num">8</div>
+          <h3>Da Manutenção e Garantia</h3>
+        </div>
+        <div class="terms-card-body">
+          <p><span class="terms-sub-id">8.1.</span> <strong>Independência Societária:</strong> A detenção de <span class="terms-highlight">35%</span> de participação societária pela CONTRATADA não a obriga à manutenção, suporte técnico contínuo ou atualização da ferramenta após o lançamento oficial.</p>
+          <p><span class="terms-sub-id">8.2.</span> <strong>Manutenção Pós-Lançamento:</strong> Qualquer serviço de sustentação, evolução de funcionalidades (roadmap) ou suporte técnico após o deploy final exigirá a celebração de um contrato de prestação de serviços apartado, com novos valores e condições de mercado.</p>
+          <p><span class="terms-sub-id">8.3.</span> <strong>Garantia Técnica:</strong> A CONTRATADA oferece uma garantia de <span class="terms-highlight">90 dias</span> após o deploy em ambiente de produção. Esta garantia cobre estritamente:</p>
+          <ul class="terms-sub-list">
+            <li>Correção de bugs (falhas lógicas)</li>
+            <li>Inconsistências funcionais em relação ao escopo originalmente contratado</li>
+            <li>Não haverá custos adicionais para estas correções, desde que não configurem novas funcionalidades</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Cláusula 9 -->
+      <div class="terms-card">
+        <div class="terms-card-header">
+          <div class="terms-card-num">9</div>
+          <h3>Do Foro</h3>
+        </div>
+        <div class="terms-card-body">
+          <p><span class="terms-sub-id">9.1.</span> Para dirimir quaisquer dúvidas oriundas deste contrato, as partes elegem o foro da comarca de [Cidade/UF].</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main><!-- /proposalContent -->
+
+<!-- ─── FOOTER ─────────────────────────────────────────────── -->
+<footer id="proposalFooter" style="display:none">
+    <div class="footer-content">
+        <div class="footer-brand">
+            <h3></h3>
+            <p>Documento de proposta — Project Chile · Fevereiro 2026</p>
+        </div>
+
+        <div class="footer-links">
+            <h4>Navegação</h4>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about/">Sobre</a></li>
+                <li><a href="/#servicos">Serviços</a></li>
+                <li><a href="/#contato">Contato</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-links">
+            <h4>Contato</h4>
+            <ul>
+                <li><a href="mailto:contato@lab904.com">contato@lab904.com</a></li>
+                <li><a href="tel:+5551980231225">+55 51 98023-1225</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 Lab904. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<script src="/scripts.js"></script>
+<script>
+  // ── Password protection ────────────────────────────────
+  // Altere a senha abaixo para configurar o acesso
+  const PROPOSAL_PASSWORD = 'lab904proposta';
+
+  (function () {
+    const overlay  = document.getElementById('passwordOverlay');
+    const form     = document.getElementById('passwordForm');
+    const input    = document.getElementById('passwordInput');
+    const error    = document.getElementById('passwordError');
+    const content  = document.getElementById('proposalContent');
+    const footer   = document.getElementById('proposalFooter');
+
+    function unlock() {
+      overlay.classList.add('hidden');
+      content.style.display = '';
+      footer.style.display = '';
+      sessionStorage.setItem('proposal_auth', 'true');
+      initProposal();
+    }
+
+    if (sessionStorage.getItem('proposal_auth') === 'true') {
+      unlock();
+    } else {
+      input.focus();
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (input.value === PROPOSAL_PASSWORD) {
+        unlock();
+      } else {
+        error.classList.add('visible');
+        input.value = '';
+        input.focus();
+      }
+    });
+  })();
+
+  // ── Proposal-specific scripts ──────────────────────────
+  function initProposal() {
+    // Fade-in on scroll (usa observeElements do scripts.js)
+    observeElements('.audience-card', 0.06);
+    observeElements('.scope-cell', 0.06);
+    observeElements('.ms-card', 0.06);
+    observeElements('.phase-card', 0.06);
+    observeElements('.terms-card', 0.06);
+    observeElements('.terms-party', 0.06);
+
+    // Requirements tabs
+    document.querySelectorAll('.req-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.req-tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.req-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        const panel = document.getElementById('req-panel-' + btn.dataset.tab);
+        if (panel) panel.classList.add('active');
+      });
+    });
+
+    // Screen accordion
+    document.querySelectorAll('.screen-acc-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const item = header.closest('.screen-item-acc');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.screen-item-acc.open').forEach(el => el.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  }
+</script>
+
+</body>
+</html>
